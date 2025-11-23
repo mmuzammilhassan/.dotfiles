@@ -117,7 +117,7 @@ static int allowbold =1;
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.8; //0.7;
+float alpha = 1; //0.7;
 float alphaOffset = 0.0;
 float alphaUnfocus;
 

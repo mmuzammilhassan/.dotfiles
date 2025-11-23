@@ -9,7 +9,7 @@ if [ "$MODE" = "dark" ]; then
     xwallpaper --zoom "$wall"
 
     wal -c
-    wal --theme /home/zephyr/.local/bin/pywal/dist/rose-pine-moon.json
+    wal --theme /home/zephyr/.local/bin/themes/rose-pine-moon.json
 
 elif [ "$MODE" = "light" ]; then
     #wall=~/pix/dds/digital-art-boy-light.jpg
@@ -17,7 +17,7 @@ elif [ "$MODE" = "light" ]; then
     xwallpaper --zoom "$wall"
 
     wal -c
-    wal --theme /home/zephyr/.local/bin/pywal/dist/rose-pine-dawn.json
+    wal --theme /home/zephyr/.local/bin/themes/rose-pine-dawn.json
 fi
 
 # Refresh the status bar

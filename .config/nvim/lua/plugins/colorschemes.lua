@@ -6,11 +6,12 @@ return {
         enabled = true,
         priority = 1000,
         config = function()
-  require("rose-pine").setup({ variant = "moon", styles = { transparency = true } })
-  --require("rose-pine").setup({ variant = "moon" })
+
+require("rose-pine").setup({ variant = "moon", styles = { transparency = true } })
+  -- require("rose-pine").setup({ variant = "moon" })
   vim.cmd.colorscheme("rose-pine")
-            --vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-            --vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+            -- vim.api.nvim_set_hl(0, "Normal", { bg = "#0a0410" })
+            -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#0a0410" })
 
 end
 
