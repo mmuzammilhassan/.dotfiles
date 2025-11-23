@@ -1,0 +1,30 @@
+#!/bin/sh
+
+
+wall=$(find ~/pix/dds/digital-art-boy-dark.jpg)
+#wall=$(find ~/pix/Anime/girl-rose.jpg)
+#wall=$(find ~/pix/Anime/girl.png)
+#wall=$(find ~/pix/wallmain/pexels-cesar-perez-733745.jpg)
+#wall=$(find ~/pix/Anime/radio.jpg)
+# wall=$(find ~/pix/Anime/wallhaven-nature.png)
+##wall=$(find ~/pix/Anime/digital-art-boy.jpg)
+###wall=$(find ~/pix/carlos/4pqrn9xjdcsc1.jpeg)
+#wall=$(find ~/pix/Anime/digital-art-boy.jpg) last one
+#wall=$(find ~/pix/dds/golden-skull.png)
+#wall=$(find ~/pix/Anime/wallhaven-501l3n.png)
+# wall=$(find ~/pix/Anime/girl.png)
+#wall=$(find ~/pix/dds/wallhaven-1p75xv.jpg)
+#wall=$(find ~/pix/dds/golden-skull.png)
+xwallpaper --zoom $wall
+
+# generate color scheme
+wal -c
+wal --theme /home/zephyr/.local/bin/pywal/dist/rose-pine-main.json
+#wal --theme /home/zephyr/.local/bin/pywal/dist/rose-pine-dawn.json
+#wal --theme /home/zephyr/.local/bin/pywal/dist/rose-pine.json
+
+# Refresh the status bar
+xdotool key super+F5
+# this dvorak remap
+xmodmap-dvorak &
+

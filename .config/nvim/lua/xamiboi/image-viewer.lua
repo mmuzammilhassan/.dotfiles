@@ -1,0 +1,51 @@
+--vim.keymap.set("n", "<leader>pp", function()
+--  local line = vim.api.nvim_get_current_line()
+--
+--  -- Try to extract src="..." or src='...'
+--  local src = line:match('src%s*=%s*"([^"]+)"') or line:match("src%s*=%s*'([^']+)'")
+--
+--  if not src then
+--    print("❌ No image src= found on this line.")
+--    return
+--  end
+--
+--  -- Resolve path relative to current file
+--  local current_dir = vim.fn.expand("%:p:h")
+--  local full_path = vim.fn.fnamemodify(current_dir .. "/" .. src, ":p")
+--
+--  -- Check if the file exists
+--  if vim.fn.filereadable(full_path) == 0 then
+--    print("❌ File not found: " .. full_path)
+--    return
+--  end
+--
+--  -- Launch sxiv (runs in its own X window)
+--  vim.fn.jobstart({ "sxiv", full_path }, { detach = true })
+--  print("✅ Opening image: " .. full_path)
+--end, { desc = "Preview <img> with sxiv" })
+--vim.keymap.set("n", "<leader>ip", function()
+--  local line = vim.api.nvim_get_current_line()
+--
+--  -- Try to extract src="..." or src='...'
+--  local src = line:match('src%s*=%s*"([^"]+)"') or line:match("src%s*=%s*'([^']+)'")
+--
+--  if not src then
+--    print("❌ No image src= found on this line.")
+--    return
+--  end
+--
+--  -- Resolve path relative to current file
+--  local current_dir = vim.fn.expand("%:p:h")
+--  local full_path = vim.fn.fnamemodify(current_dir .. "/" .. src, ":p")
+--
+--  -- Check if the file exists
+--  if vim.fn.filereadable(full_path) == 0 then
+--    print("❌ File not found: " .. full_path)
+--    return
+--  end
+--
+--  -- Launch sxiv (runs in its own X window)
+--  vim.fn.jobstart({ "sxiv", full_path }, { detach = true })
+--  print("✅ Opening image: " .. full_path)
+--end, { desc = "Preview <img> with sxiv" })
+--

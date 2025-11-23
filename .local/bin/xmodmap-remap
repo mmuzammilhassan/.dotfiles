@@ -1,0 +1,40 @@
+#!/bin/bash
+# Remap Caps Lock to Mode_switch only (no Caps Lock functionality)
+# this is for qwerty
+xmodmap -e "keycode 66 = Mode_switch"
+
+# alt_R is Caps_Lock
+xmodmap -e "keycode 108 = Caps_Lock"
+
+# Remap Shift_L to Control_L 
+# xmodmap -e "keycode 50 = Control_L"
+
+# Set Space as a dual-purpose key (regular space + Mode_switch)
+xmodmap -e "keycode 65 = space Mode_switch"
+
+# Map hjkl + Mode_switch to arrow keys
+xmodmap -e "keysym h = h H Left"
+xmodmap -e "keysym j = j J Down"
+xmodmap -e "keysym k = k K Up"
+xmodmap -e "keysym l = l L Right"
+
+# Map additional keys with Mode_switch
+xmodmap -e "keysym f = f F BackSpace"    # Mode_key + f -> Backspace
+xmodmap -e "keysym d = d D Delete"       # Mode_key + d -> Delete
+xmodmap -e "keysym s = s S dollar"       # Mode_key + s -> $
+
+# Map additional keys with Escape, Return
+xmodmap -e "keysym n = n N Return"       # Mode_key + n -> Return/Enter
+xmodmap -e "keysym c = c C Escape"       # Mode_key + c -> Escape
+xmodmap -e "keysym r = r R Tab"          # Mode_key + r -> Tab
+
+# map additional keys with for = () [] {}  
+xmodmap -e "keysym q = q Q equal"        # Mode_key + q -> equal 
+xmodmap -e "keysym w = w W parenleft"    # Mode_key + w -> parenleft
+xmodmap -e "keysym e = e E parenright"   # Mode_key + e -> parenright
+
+xmodmap -e "keysym u = u U bracketleft"  # Mode_key + u -> bracketleft
+xmodmap -e "keysym i = i I bracketright" # Mode_key + i -> bracketright
+
+xmodmap -e "keysym p = p P braceright"   # Mode_key + u -> braceright
+xmodmap -e "keysym o = o O braceleft"    # Mode_key + i -> braceleft

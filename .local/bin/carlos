@@ -1,0 +1,15 @@
+#!/bin/sh
+wall=$(find ~/pix/carlos/ -type f -name "*.jpeg" -o -name "*.jpg" -o -name "*.png" | shuf -n 1)
+# add this as background wallpaper
+xwallpaper --zoom $wall
+
+# generate color scheme
+wal -c
+
+wal -i $wall
+
+# Refresh the status bar
+xdotool key super+F5
+
+# Dvorak remap
+xmodmap-dvorak &

@@ -1,0 +1,112 @@
+--Live statusline charcter count (all non-spaces)
+--_G.visible_char_count = function()
+--  local s = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
+--  local n = 0
+--  for c in s:gmatch("%S") do  -- %S = non-whitespace
+--    n = n + 1
+--  end
+--  return n
+--end
+--
+--vim.o.statusline = (vim.o.statusline or "") .. " %{%v:lua.visible_char_count()%} chars"
+
+--QUICK ONE-SHOT COMMAND
+--In Neovim, you can run:
+--:%s/\S//gn
+--\S = “any non-whitespace character”
+--//gn = don’t replace, just count matches
+
+---- RIGHT BOTTOM SCROLL THINGY
+---- https://symbl.cc/en/unicode-table/#braille-patterns  2809
+--function _G.scroll_bar()
+----    local chars = { '█','▇','▆','▅','▄','▃','▂','▁' }  -- reversed!
+----    --local chars = { '▁','▂','▃','▄','▅','▆','▇','█' }
+----
+----    --    local chars = { '▀','⠉','⠒','⠶', '━','⠤','⣀', '▄'}
+----
+--    local chars = { '⠉', '⣶', '▄', '⣭', '⣉', '⣛', '▀', '⠿', '⣀' }
+----
+----    --  local chars = { '⠉','⠒', '━','⠤','⣀'}
+----    --local chars = { '⣶', '⣭', '⣛', '⠿' }
+--    local current_line = vim.fn.line('.')
+--    local total_lines = vim.fn.line('$')
+--    local ratio = current_line / total_lines
+--    local index = math.floor(ratio * (#chars - 1)) + 1
+--    return chars[index]
+--end
+--
+--local function git_branch()
+--  local handle = io.popen("git branch --show-current 2>/dev/null")
+--  if handle == nil then return "" end
+--  local branch = handle:read("*a") or ""
+--  handle:close()
+--  branch = branch:gsub("\n", "")
+--  if branch ~= "" then
+--    return " " .. branch
+--  else
+--    return ""
+--  end
+--end
+
+--vim.o.statusline = "%f %h%m%r%=" .. "%{v:lua.git_branch()} %y %p%%"
+--_G.git_branch = git_branch  -- make available to statusline
+
+
+
+-- SET STATUSLINE
+--vim.o.statusline = table.concat {
+------    ' %-10{v:lua.display_mode()}', -- modes
+------    ' %=',                   -- this will make statusbar in center
+--    '%f',                        -- File name
+--    ' %m%r%h%w',                 -- Flags
+--    -- ' [%{&ff}]',              -- File format
+--    -- ' [%{&fileencoding}]',
+--    ' %=',
+--    --'%y ',                     -- File type
+--    '%l,%c',                     -- Line and column
+--    '       ',
+--    '%{v:lua.git_branch()}',
+--    ' ',
+--    --' %{FugitiveStatusline()} ',-- → Git info if using vim-fugitive
+--    -- '%l:%c',                 -- Line and column
+--    ' %p%%',                 -- Percentage through file
+--    --'  ',
+--    ' %{v:lua.scroll_bar()}' -- Our scrollbar!
+--}
+
+-- Return full mode name
+--function _G.display_mode()
+--    local mode_map = {
+--        n = "[NORMAL]",
+--        no = "[N-PENDING]",
+--        v = "[VISUAL]",
+--        V = "[V-LINE]",
+--        [""] = "[V-BLOCK]",
+--        i = "[INSERT]",
+--        ic = "[INSERT]",
+--        R = "[REPLACE]",
+--        Rv = "[V-REPLACE]",
+--        c = "[COMMAND]",
+--        cv = "[VIM EX]",
+--        ce = "[EX]",
+--        s = "[SELECT]",
+--        S = "[S-LINE]",
+--        [""] = "[S-BLOCK]",
+--        t = "[TERMINAL]",
+--    }
+--
+--    local current_mode = vim.api.nvim_get_mode().mode
+--    return mode_map[current_mode] or current_mode
+--end
+
+--statusbar info
+--vim.o.statusline = ' %t %m%r%h%w %=%l,%c %y %{FugitiveStatusline()} '
+--%m → modified flag (+ if unsaved)
+--%r → readonly flag
+--%h → help buffer flag
+--%w → preview window flag
+--%= → separates left/right
+--%l:%c → line:column
+--%y → file type
+--%{FugitiveStatusline()} → Git info if using vim-fugitive
+--%F → full path in winbar

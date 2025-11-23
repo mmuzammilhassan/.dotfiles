@@ -1,0 +1,20 @@
+#!/bin/bash
+
+selected=$(find ~/ ~/zephyr ~/awebcode -maxdepth 3 -type d 2>/dev/null | fzf)
+[[ -z "$selected" ]] && exit 0
+
+session=$(basename "$selected" | tr . _)
+
+if ! tmux has-session -t "$session" 2>/dev/null; then
+    tmux new-session -ds "$session" -c "$selected"
+fi
+
+tmux switch-client -t "$session"
+
+#✅ Workflow After This
+#C-f → fuzzy find dir → it creates or switches to session.
+#
+#Inside session, do C-s → type h → now saved to M-h.
+#
+#Later, just do M-h → boom, you're back.
+

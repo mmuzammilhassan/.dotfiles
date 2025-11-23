@@ -1,0 +1,101 @@
+#version: '3.9'
+
+networks:
+  app_net:
+
+services:
+  # Shared MariaDB
+  db: # this is the host = "db"
+    image: mariadb:11
+    container_name: infra_db
+    restart: always
+    ports:
+      - "127.0.0.1:3306:3306" # ← add this line 
+    volumes:
+      - ../storage/mariadb_data:/var/lib/mysql
+#      - ../gio/storage/mariadb_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # <-- Reads from .env
+#      MYSQL_DATABASE: myproject
+    networks:
+      - app_net
+
+  # Adminer
+  adminer:
+    image: adminer
+    container_name: infra_adminer
+    restart: always
+    ports:
+      - "3000:8080"
+    depends_on:
+      - db
+    networks:
+      - app_net
+
+#  # Mycli for MariaDB
+#  mycli:
+#    image: jdecool/mycli
+#    container_name: infra_mycli
+#    entrypoint: ["sleep", "infinity"]
+#    volumes:
+#      - ~/.myclirc:/root/.myclirc:ro  # mount host config into container
+#    networks:
+#      - app_net
+#    depends_on:
+#      - db
+
+  # # GIO PHP App
+  # gio_app:
+  #   build: ../gio/docker
+  #   container_name: gio_app
+  #   restart: always
+  #   volumes:
+  #     - ../gio:/var/www            # ✅ Full project
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - app_net
+  #
+  # # GIO Nginx
+  # gio_nginx:
+  #   image: nginx:alpine
+  #   container_name: gio_nginx
+  #   restart: always
+  #   ports:
+  #     - "8000:80"
+  #   volumes:
+  #     - ../gio:/var/www     # ✅ Just web root
+  #     - ../gio/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+  #   depends_on:
+  #     - gio_app
+  #   networks:
+  #     - app_net
+  #
+
+  # xami PHP App
+  xami_app:
+    build: ../xami_app/docker
+    container_name: xami_app
+    restart: always
+    volumes:
+      - ../xami_app:/var/www
+    depends_on:
+      - db
+    networks:
+      - app_net
+
+  # xami Nginx
+  xami_nginx:
+    image: nginx:alpine
+    container_name: xami_nginx
+    restart: always
+    ports:
+      - "8001:80"
+    volumes:
+      - ../xami_app:/var/www
+      - ../xami_app/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - xami_app
+    networks:
+      - app_net
+

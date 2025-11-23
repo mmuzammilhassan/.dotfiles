@@ -1,0 +1,39 @@
+#!/bin/bash
+# this is for Dvorak
+xmodmap -e "keycode 66 = Mode_switch"
+
+# alt_R is Caps_Lock
+xmodmap -e "keycode 108 = Caps_Lock"
+
+# Set Space as a dual-purpose key (regular space + Mode_switch)
+xmodmap -e "keycode 65 = space Mode_switch"
+
+# Map hjkl + Mode_switch to arrow keys
+xmodmap -e "keysym h = h H Left"
+xmodmap -e "keysym j = j J Down"
+xmodmap -e "keysym k = k K Up"
+xmodmap -e "keysym l = l L Right"
+
+# Map dhtn + Mode_switch to arrow keys
+#xmodmap -e "keysym d = d D Left"
+#xmodmap -e "keysym h = h H Down"
+#xmodmap -e "keysym t = t T Up"
+#xmodmap -e "keysym n = n N Right"
+
+# Map additional keys with Mode_switch
+xmodmap -e "keysym u = u U BackSpace"    # Mode_key + u -> Backspace
+
+## Map additional keys with Escape, Return
+xmodmap -e "keysym b = b B Return"       # Mode_key + b -> Return/Enter
+xmodmap -e "keysym e = e E Escape"       # Mode_key + e -> esc
+xmodmap -e "keysym o = o O Delete"       # Mode_key + o -> Delete
+
+#xmodmap -e "keysym r = r R Tab"          # Mode_key + r -> Tab
+xmodmap -e "keysym c = c C dollar"          # Mode_key + r -> $
+
+xmodmap -e "keysym y = y Y braceleft"    # Mode_key + y -> {
+xmodmap -e "keysym p = p P parenleft"  # Mode_key + p -> (
+xmodmap -e "keysym i = i I bracketleft"    # Mode_key + i -> [
+xmodmap -e "keysym d = d D bracketright"   # Mode_key + d -> ]
+xmodmap -e "keysym g = g G parenright" # Mode_key + g -> )
+xmodmap -e "keysym f = f F braceright"   # Mode_key + f -> }

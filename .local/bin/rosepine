@@ -1,0 +1,28 @@
+#!/bin/sh
+
+MODE=$1   # pass "dark" or "light" when running the script
+
+if [ "$MODE" = "dark" ]; then
+#wall=$(find ~/pix/carlos/ -type f -name "*.jpeg" -o -name "*.jpg" -o -name "*.png" | shuf -n 1)
+    #wall=~/pix/dds/digital-art-boy-dark.jpg
+    wall=~/pix/carlos/wallhaven-1pdqdv.jpg
+    xwallpaper --zoom "$wall"
+
+    wal -c
+    wal --theme /home/zephyr/.local/bin/pywal/dist/rose-pine-moon.json
+
+elif [ "$MODE" = "light" ]; then
+    #wall=~/pix/dds/digital-art-boy-light.jpg
+    wall=~/pix/dds/wallhaven-poko7j.jpg
+    xwallpaper --zoom "$wall"
+
+    wal -c
+    wal --theme /home/zephyr/.local/bin/pywal/dist/rose-pine-dawn.json
+fi
+
+# Refresh the status bar
+ xdotool key "super+F5"
+
+# Dvorak remap
+xmodmap-dvorak &
+

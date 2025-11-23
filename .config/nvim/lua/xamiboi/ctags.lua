@@ -1,0 +1,55 @@
+---- lua/xamiboi/ctags.lua
+--local M = {}
+--
+--local function get_project_root()
+--  local cwd = vim.fn.expand("%:p:h")
+--  -- Look for PHP-specific markers
+--  local markers = { "composer.json", "index.php", "artisan" }
+--
+--  for _, marker in ipairs(markers) do
+--    local rootfile = vim.fn.findfile(marker, cwd .. ";")
+--    if rootfile ~= "" then
+--      return vim.fn.fnamemodify(rootfile, ":h")
+--    end
+--  end
+--
+--  -- Fallback: only if current buffer is PHP, use git root
+--  if vim.bo.filetype == "php" then
+--    local gitdir = vim.fn.finddir(".git", cwd .. ";")
+--    if gitdir ~= "" then
+--      return vim.fn.fnamemodify(gitdir, ":h")
+--    end
+--  end
+--
+--  return nil
+--end
+--
+---- Auto-regenerate tags on PHP save
+--vim.api.nvim_create_autocmd("BufWritePost", {
+--  pattern = "*.php",
+--  callback = function()
+--    local root = get_project_root()
+--    if not root then return end
+--
+---- for debugging test this print statement
+--print("Regenerating ctags for project root: " .. root)
+--    vim.fn.jobstart({
+--      "ctags",
+--      "-R",
+--      "--languages=PHP",
+--      "--php-kinds=+cdfilntva", -- adjust for your ctags build
+--      "--fields=+aimS",
+--      "--extras=+q",
+----      "--exclude=vendor",
+--      "-f", root .. "/.tags",
+--      root,
+--    }, { detach = true })
+--  end,
+--})
+--
+---- CHEATSHEET (YOUR MINI PHPSTORM-LIKE FLOW)
+---- CTRL+] → jump to definition (ctags)
+---- <C-o>/<C-i> for back/forward
+--
+--return M
+--

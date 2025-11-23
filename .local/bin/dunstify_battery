@@ -1,0 +1,53 @@
+#!/bin/sh
+
+#BAT_DIR=$(find /sys/class/power_supply/ -maxdepth 1 -type d -name "BAT*" | head -n 1)
+# Autodetect battery path
+BAT_PATH=$(find /sys/class/power_supply/BAT?* | head -n 1)
+
+FULL_NOTIFIED=0  # guard flag
+
+progress_bar() {
+    local percent=$1
+    local filled=$(( percent / 10 ))
+    local empty=$(( 10 - filled ))
+    printf '%s' "$(printf '█%.0s' $(seq 1 $filled))"
+    printf '%s' "$(printf '░%.0s' $(seq 1 $empty))"
+}
+
+while true; do
+    CAPACITY=$(cat "$BAT_PATH/capacity" 2>/dev/null)
+    STATUS=$(cat "$BAT_PATH/status" 2>/dev/null)
+
+ BAR=$(progress_bar "$CAPACITY")
+ if [ "$STATUS" = "Discharging" ] && [ "$CAPACITY" -le 30 ]; then
+       dunstify -u critical -t 0 -r 9999 "   Battery low! [$CAPACITY%]" "$BAR $CAPACITY%"
+        # check again quickly so we notice charger connect ASAP
+        sleep 3
+        continue
+    fi
+
+    if [ "$STATUS" = "Charging" ] && [ "$CAPACITY" -le 30 ]; then
+        dunstify -u normal -t 3000 -r 9999 "   Charging..." "$BAR $CAPACITY%"
+        sleep 10
+        continue
+    fi
+
+    if [ "$STATUS" = "Charging" ] && [ "$CAPACITY" -ge 80 ] && [ $FULL_NOTIFIED -eq 0 ]; then
+        dunstify -u normal -t 10000 -r 9998 "   Battery full [$CAPACITY%]" "$BAR $CAPACITY%"
+        FULL_NOTIFIED=1
+        sleep 120
+        continue
+    fi
+
+    if [ "$STATUS" = "Discharging" ]; then
+        FULL_NOTIFIED=0
+    fi
+
+    sleep 120
+done
+
+#How it behaves now
+#≤30% discharging → updates every 3s until charger connects.
+#≤30% charging → updates every 10s.
+#≥80% charging → one popup, then sleeps 120s.
+#40–80% healthy zone → sleeps 60s (very light on CPU).
