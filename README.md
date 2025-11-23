@@ -1,1 +1,1 @@
-Dotfiles v1.6
+Dotfiles v2.4
