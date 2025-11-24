@@ -10,4 +10,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- load your config
-require("xamiboi")
+require("zephyr")
+
+require("core.mason-path")
+require("core.lsp")
+require("core.statusline")
+require("config.options")
+require("config.keymaps")
+require("config.autocmds")
+require("config.mason-verify")
+require("config.health-check")
+require("core.lazy")

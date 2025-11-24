@@ -1,20 +1,135 @@
--- Mason PATH is handled by core.mason-path
-vim.lsp.enable({
-    "lua-ls",
-    "gopls",
-    "zls",
-    "ts-ls",
-    "rust-analyzer",
-    "intelephense",
-    "twiggy",
-    "tailwindcss",
-    "html-ls",
-    "css-ls",
-    "vue-ls",
+-- ============================================================================
+-- LSP Server Definitions
+-- ============================================================================
+-- Each server config is loaded from lsp/<server-name>.lua
+-- These configs are automatically managed by Mason (see lua/plugins/mason.lua)
+
+local servers = {
+    "lua-ls",        -- Lua language server
+    "gopls",         -- Go language server
+    "zls",           -- Zig language server
+    "ts-ls",         -- TypeScript/JavaScript language server
+    "rust-analyzer", -- Rust language server
+    "intelephense",  -- PHP language server
+    "tailwindcss",   -- Tailwind CSS language server
+    "html-ls",       -- HTML language server
+    "css-ls",        -- CSS language server
+    "vue-ls",        -- Vue language server
+}
+
+-- ============================================================================
+-- LSP Capabilities Setup (blink.cmp integration)
+-- ============================================================================
+
+local function get_capabilities()
+    -- Check if blink.cmp is available
+    local has_blink, blink = pcall(require, "blink.cmp")
+
+    if has_blink and blink.get_lsp_capabilities then
+        -- Merge default capabilities with blink.cmp capabilities
+        return vim.tbl_deep_extend(
+            "force",
+            vim.lsp.protocol.make_client_capabilities(),
+            blink.get_lsp_capabilities(),
+            {
+                -- Additional capabilities can be added here
+                workspace = {
+                    fileOperations = {
+                        didRename = true,
+                        willRename = true,
+                    },
+                },
+            }
+        )
+    else
+        -- Fallback to default capabilities if blink.cmp is not available
+        return vim.lsp.protocol.make_client_capabilities()
+    end
+end
+
+-- ============================================================================
+-- LSP Keymaps (set on attach)
+-- ============================================================================
+
+local function setup_keymaps(bufnr)
+    local function map(mode, lhs, rhs, desc)
+        vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = "LSP: " .. desc, silent = true })
+    end
+
+    -- Navigation
+    map("n", "gd", vim.lsp.buf.definition, "Go to definition")
+    map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+    map("n", "gi", vim.lsp.buf.implementation, "Go to implementation")
+    map("n", "gr", vim.lsp.buf.references, "Go to references")
+    map("n", "gt", vim.lsp.buf.type_definition, "Go to type definition")
+
+    -- Information
+    map("n", "K", vim.lsp.buf.hover, "Hover documentation")
+    map("n", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
+    map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
+
+    -- Code actions
+    map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
+    map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+    map("n", "<leader>cf", function() vim.lsp.buf.format({ async = true }) end, "Format buffer")
+
+    -- Diagnostics
+    map("n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
+    map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
+    map("n", "<leader>cd", vim.diagnostic.open_float, "Show diagnostic")
+    map("n", "<leader>cl", vim.diagnostic.setloclist, "Diagnostics to loclist")
+
+    -- Workspace
+    map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
+    map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
+    map("n", "<leader>wl", function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, "List workspace folders")
+end
+
+-- ============================================================================
+-- LSP Attach Handler
+-- ============================================================================
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
+    callback = function(args)
+        local bufnr = args.buf
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+        if not client then return end
+
+        -- Setup keymaps for this buffer
+        setup_keymaps(bufnr)
+
+        -- Enable completion triggered by <c-x><c-o>
+        vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+        -- Enable inlay hints if supported (Neovim 0.10+)
+        if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end
+
+        -- Document highlight on cursor hold
+        if client.server_capabilities.documentHighlightProvider then
+            local highlight_group = vim.api.nvim_create_augroup("LspDocumentHighlight_" .. bufnr, { clear = true })
+            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+                buffer = bufnr,
+                group = highlight_group,
+                callback = vim.lsp.buf.document_highlight,
+            })
+            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+                buffer = bufnr,
+                group = highlight_group,
+                callback = vim.lsp.buf.clear_references,
+            })
+        end
+    end,
 })
 
--- LSP servers are automatically managed by Mason
--- Use :MasonVerify to check which tools are Mason-managed
+-- ============================================================================
+-- Diagnostic Configuration
+-- ============================================================================
 
 vim.diagnostic.config({
     virtual_text = true,
@@ -24,44 +139,87 @@ vim.diagnostic.config({
     float = {
         border = "rounded",
         source = true,
+        header = "",
+        prefix = "",
     },
     signs = {
         text = {
-            [vim.diagnostic.severity.ERROR] = "󰅚",
-            [vim.diagnostic.severity.WARN] = "󰀪",
-            [vim.diagnostic.severity.INFO] = "󰋽",
-            [vim.diagnostic.severity.HINT] = "󰌶",
+            [vim.diagnostic.severity.ERROR] = "󰅚 ",
+            [vim.diagnostic.severity.WARN] = "󰀪 ",
+            [vim.diagnostic.severity.INFO] = "󰋽 ",
+            [vim.diagnostic.severity.HINT] = "󰌶 ",
         },
         numhl = {
             [vim.diagnostic.severity.ERROR] = "ErrorMsg",
-            [vim.diagnostic.severity.WARN]  = "WarningMsg",
-            [vim.diagnostic.severity.INFO] = "InfoMsg",
-            [vim.diagnostic.severity.HINT]  = "HintMsg",
+            [vim.diagnostic.severity.WARN] = "WarningMsg",
         },
     },
 })
 
+-- ============================================================================
+-- LSP Server Setup
+-- ============================================================================
 
--- Extras
+local capabilities = get_capabilities()
 
-local function restart_lsp(bufnr)
-    bufnr = bufnr or vim.api.nvim_get_current_buf()
+for _, server_name in ipairs(servers) do
+    -- Load server-specific config from lsp/<server-name>.lua
+    local config_path = vim.fn.stdpath("config") .. "/lsp/" .. server_name .. ".lua"
+
+    if vim.fn.filereadable(config_path) == 1 then
+        -- Load the config file
+        local ok, server_config = pcall(dofile, config_path)
+
+        if ok and type(server_config) == "table" then
+            -- Merge capabilities with server config
+            server_config.capabilities = vim.tbl_deep_extend(
+                "force",
+                capabilities,
+                server_config.capabilities or {}
+            )
+
+            -- Enable the LSP with the loaded config
+            vim.lsp.enable(server_name, server_config)
+        else
+            -- If config load failed, enable with default config
+            vim.notify(
+                string.format("Failed to load config for %s, using defaults", server_name),
+                vim.log.levels.WARN
+            )
+            vim.lsp.enable(server_name, { capabilities = capabilities })
+        end
+    else
+        -- No config file, use default config
+        vim.lsp.enable(server_name, { capabilities = capabilities })
+    end
+end
+
+-- ============================================================================
+-- Utility Commands
+-- ============================================================================
+
+-- LspRestart: Restart LSP clients for current buffer
+vim.api.nvim_create_user_command("LspRestart", function()
+    local bufnr = vim.api.nvim_get_current_buf()
     local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
+    if #clients == 0 then
+        vim.notify("No LSP clients attached to restart", vim.log.levels.WARN)
+        return
+    end
+
     for _, client in ipairs(clients) do
+        vim.notify("Restarting " .. client.name, vim.log.levels.INFO)
         vim.lsp.stop_client(client.id)
     end
 
     vim.defer_fn(function()
-        vim.cmd('edit')
+        vim.cmd("edit")
     end, 100)
-end
+end, { desc = "Restart LSP clients for current buffer" })
 
-vim.api.nvim_create_user_command('LspRestart', function()
-    restart_lsp()
-end, {})
-
-local function lsp_status()
+-- LspStatus: Show brief LSP status
+vim.api.nvim_create_user_command("LspStatus", function()
     local bufnr = vim.api.nvim_get_current_buf()
     local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
@@ -78,7 +236,6 @@ local function lsp_status()
         print("  Root: " .. (client.config.root_dir or "N/A"))
         print("  Filetypes: " .. table.concat(client.config.filetypes or {}, ", "))
 
-        -- Check capabilities
         local caps = client.server_capabilities
         local features = {}
         if caps.completionProvider then table.insert(features, "completion") end
@@ -92,11 +249,10 @@ local function lsp_status()
         print("  Features: " .. table.concat(features, ", "))
         print("")
     end
-end
+end, { desc = "Show brief LSP status" })
 
-vim.api.nvim_create_user_command('LspStatus', lsp_status, { desc = "Show detailed LSP status" })
-
-local function check_lsp_capabilities()
+-- LspCapabilities: Show all capabilities for attached LSP clients
+vim.api.nvim_create_user_command("LspCapabilities", function()
     local bufnr = vim.api.nvim_get_current_buf()
     local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
@@ -128,6 +284,7 @@ local function check_lsp_capabilities()
             { "Rename",                    caps.renameProvider },
             { "Folding Range",             caps.foldingRangeProvider },
             { "Selection Range",           caps.selectionRangeProvider },
+            { "Inlay Hint",                caps.inlayHintProvider },
         }
 
         for _, cap in ipairs(capability_list) do
@@ -136,11 +293,10 @@ local function check_lsp_capabilities()
         end
         print("")
     end
-end
+end, { desc = "Show all LSP capabilities" })
 
-vim.api.nvim_create_user_command('LspCapabilities', check_lsp_capabilities, { desc = "Show LSP capabilities" })
-
-local function lsp_diagnostics_info()
+-- LspDiagnostics: Show diagnostic counts
+vim.api.nvim_create_user_command("LspDiagnostics", function()
     local bufnr = vim.api.nvim_get_current_buf()
     local diagnostics = vim.diagnostic.get(bufnr)
 
@@ -157,12 +313,10 @@ local function lsp_diagnostics_info()
     print("  Info: " .. counts.INFO)
     print("  Hints: " .. counts.HINT)
     print("  Total: " .. #diagnostics)
-end
+end, { desc = "Show diagnostic counts for current buffer" })
 
-vim.api.nvim_create_user_command('LspDiagnostics', lsp_diagnostics_info, { desc = "Show LSP diagnostics count" })
-
-
-local function lsp_info()
+-- LspInfo: Comprehensive LSP information
+vim.api.nvim_create_user_command("LspInfo", function()
     local bufnr = vim.api.nvim_get_current_buf()
     local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
@@ -171,7 +325,6 @@ local function lsp_info()
     print("═══════════════════════════════════")
     print("")
 
-    -- Basic info
     print("󰈙 Language client log: " .. vim.lsp.get_log_path())
     print("󰈔 Detected filetype: " .. vim.bo.filetype)
     print("󰈮 Buffer: " .. bufnr)
@@ -199,14 +352,12 @@ local function lsp_info()
         print("  Command: " .. table.concat(client.config.cmd or {}, " "))
         print("  Filetypes: " .. table.concat(client.config.filetypes or {}, ", "))
 
-        -- Server status
         if client.is_stopped() then
             print("  Status: 󰅚 Stopped")
         else
             print("  Status: 󰄬 Running")
         end
 
-        -- Workspace folders
         if client.workspace_folders and #client.workspace_folders > 0 then
             print("  Workspace folders:")
             for _, folder in ipairs(client.workspace_folders) do
@@ -214,14 +365,12 @@ local function lsp_info()
             end
         end
 
-        -- Attached buffers count
         local attached_buffers = {}
         for buf, _ in pairs(client.attached_buffers or {}) do
             table.insert(attached_buffers, buf)
         end
         print("  Attached buffers: " .. #attached_buffers)
 
-        -- Key capabilities
         local caps = client.server_capabilities
         local key_features = {}
         if caps.completionProvider then table.insert(key_features, "completion") end
@@ -237,7 +386,6 @@ local function lsp_info()
         print("")
     end
 
-    -- Diagnostics summary
     local diagnostics = vim.diagnostic.get(bufnr)
     if #diagnostics > 0 then
         print("󰒡 Diagnostics Summary:")
@@ -260,110 +408,4 @@ local function lsp_info()
     print("")
     print("Use :LspLog to view detailed logs")
     print("Use :LspCapabilities for full capability list")
-end
-
--- Create command
-vim.api.nvim_create_user_command('LspInfo', lsp_info, { desc = "Show comprehensive LSP information" })
-
-
-local function lsp_status_short()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local clients = vim.lsp.get_clients({ bufnr = bufnr })
-
-    if #clients == 0 then
-        return "" -- Return empty string when no LSP
-    end
-
-    local names = {}
-    for _, client in ipairs(clients) do
-        table.insert(names, client.name)
-    end
-
-    return "󰒋 " .. table.concat(names, ",")
-end
-
-local function git_branch()
-    local ok, handle = pcall(io.popen, "git branch --show-current 2>/dev/null")
-    if not ok or not handle then
-        return ""
-    end
-    local branch = handle:read("*a")
-    handle:close()
-    if branch and branch ~= "" then
-        branch = branch:gsub("\n", "")
-        return " 󰊢 " .. branch
-    end
-    return ""
-end
-
-local function formatter_status()
-    local ok, conform = pcall(require, "conform")
-    if not ok then
-        return ""
-    end
-
-    local formatters = conform.list_formatters_to_run(0)
-    if #formatters == 0 then
-        return ""
-    end
-
-    local formatter_names = {}
-    for _, formatter in ipairs(formatters) do
-        table.insert(formatter_names, formatter.name)
-    end
-
-    return "󰉿 " .. table.concat(formatter_names, ",")
-end
-
-local function linter_status()
-    local ok, lint = pcall(require, "lint")
-    if not ok then
-        return ""
-    end
-
-    local linters = lint.linters_by_ft[vim.bo.filetype] or {}
-    if #linters == 0 then
-        return ""
-    end
-
-    return "󰁨 " .. table.concat(linters, ",")
-end
--- Safe wrapper functions for statusline
-local function safe_git_branch()
-    local ok, result = pcall(git_branch)
-    return ok and result or ""
-end
-
-local function safe_lsp_status()
-    local ok, result = pcall(lsp_status_short)
-    return ok and result or ""
-end
-
-local function safe_formatter_status()
-    local ok, result = pcall(formatter_status)
-    return ok and result or ""
-end
-
-local function safe_linter_status()
-    local ok, result = pcall(linter_status)
-    return ok and result or ""
-end
-
-_G.git_branch = safe_git_branch
-_G.lsp_status = safe_lsp_status
-_G.formatter_status = safe_formatter_status
-_G.linter_status = safe_linter_status
-
--- THEN set the statusline
-vim.opt.statusline = table.concat({
-    "%{v:lua.git_branch()}",       -- Git branch
-    "%f",                          -- File name
-    "%m",                          -- Modified flag
-    "%r",                          -- Readonly flag
-    "%=",                          -- Right align
-    "%{v:lua.linter_status()}",    -- Linter status
-    "%{v:lua.formatter_status()}", -- Formatter status
-    "%{v:lua.lsp_status()}",       -- LSP status
-    " %l:%c",                      -- Line:Column
-    " %p%%"                        -- Percentage through file
-}, " ")
+end, { desc = "Show comprehensive LSP information" })

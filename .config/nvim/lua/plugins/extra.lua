@@ -76,24 +76,23 @@ return {
         },
       },
     },
-     {
-       "saghen/blink.cmp",
-       opts = {
-         sources = {
-           -- add lazydev to your completion providers
-           --default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-           default = { "lsp", "path", "snippets", "buffer" },
-           providers = {
-        --     lazydev = {
-        --       name = "LazyDev",
-        --       module = "lazydev.integrations.blink",
-        --       -- make lazydev completions top priority (see `:h blink.cmp`)
-        --       score_offset = 100,
-        --     },
-           },
-         },
-       },
-     }
+    -- {
+    --   "saghen/blink.cmp",
+    --   opts = {
+    --     sources = {
+    --       -- add lazydev to your completion providers
+    --       default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+    --       providers = {
+    --         lazydev = {
+    --           name = "LazyDev",
+    --           module = "lazydev.integrations.blink",
+    --           -- make lazydev completions top priority (see `:h blink.cmp`)
+    --           score_offset = 100,
+    --         },
+    --       },
+    --     },
+    --   },
+    -- }
   },
 
   -- editor config support
@@ -101,20 +100,20 @@ return {
     "editorconfig/editorconfig-vim",
   },
 
---  {
---    "folke/flash.nvim",
---    event = "VeryLazy",
---    ---@type Flash.Config
---    opts = {},
---    -- stylua: ignore
---   keys = {
---      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
---      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
---      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
---      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
---      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
---    },
---  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    },
+  },
 
   {
     "utilyre/barbecue.nvim",
@@ -164,14 +163,14 @@ return {
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [']quote
       --  - ci'  - [C]hange [I]nside [']quote
---      require("mini.ai").setup({ n_lines = 500 })
+      require("mini.ai").setup({ n_lines = 500 })
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
---      require("mini.surround").setup()
+      require("mini.surround").setup()
 
       require("mini.pairs").setup()
 

@@ -67,7 +67,6 @@ return {
             -- PHP/Laravel
             php = { "pint" },
 
-
             -- Twig
             twiggy = { "twiggy" },
 

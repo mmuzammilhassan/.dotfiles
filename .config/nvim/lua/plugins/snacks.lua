@@ -1,61 +1,62 @@
 return {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false, -- loads immediately, but still lightweight
-    ---@type snacks.Config
-    opts = {
-        bigfile = { enabled = true },
-        explorer = {
-            enabled = true,
-            icons = true,
-        },
-        input = { enabled = true },
-        notifier = {
-            enabled = true,
-            top_down = false, -- grow notifications upward (like nvim-notify)
-            max_width = 60,
-            timeout = 3000, -- ms
-        },
-        dashboard = {
-            preset = {
-                --Welcome back, Zephyr
-                -- ____   ____   ____   _   _   _  _   ____
-                --(_   ) ( ___) (  _ \ ( )_( ) ( \/ ) (  _ \
-                -- / /_   )__)   )___/  ) _ (   \  /   )   /
-                --(____) (____) (__)   (_) (_)  (__)  (_)\_)]],
-                header =
-[[____  ____  ____  _   _  _  _  ____
-(_   )( ___)(  _ \( )_( )( \/ )(  _ \
- / /_  )__)  )___/ ) _ (  \  /  )   /
-(____)(____)(__)  (_) (_) (__) (_)\_)
+  "folke/snacks.nvim",
+  priority = 1000,
+  lazy = false,
+  ---@type snacks.Config
+  opts = {
+    bigfile = { enabled = true },
+    dashboard = {
+      preset = {
+        --Welcome back, Zephyr
+        -- ____   ____   ____   _   _   _  _   ____
+        --(_   ) ( ___) (  _ \ ( )_( ) ( \/ ) (  _ \
+        -- / /_   )__)   )___/  ) _ (   \  /   )   /
+        --(____) (____) (__)   (_) (_)  (__)  (_)\_)]],
+        header =
+[[████████ ████████ ███████  ███  ███ ███ ███ ███████ 
+     ███ ███      ███  ███ ███  ███ ███ ███ ███  ███
+   ███   ██████   ███████  ████████  █████  ███████ 
+ ███     ███      ███      ███  ███   ███   ███ ███ 
+████████ ████████ ███      ███  ███   ███   ███  ███
 
 https://github.com/mmuzammilhassan]],
-            },
-            sections = {
-                { section = "header" },
-                { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-                { icon = " ", title = "Recent Files", limit = 9, section = "recent_files", indent = 2, padding = 1 },
-               -- { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-                { icon = "󰾆 ", section = "startup" },
-            },
-        },
+      },
+      sections = {
+        { section = "header" },
+        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+        { icon = " ", title = "Recent Files", limit = 9, section = "recent_files", indent = 2, padding = 1 },
+        -- { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+        { icon = "󰾆 ", section = "startup" },
+      },
+    },
+
+    explorer = { enabled = true },
+    indent = { enabled = false },
+    input = { enabled = true },
+    notifier = {
+      -- max_width = 60,
+      top_down = false, -- grow notifications upward (like nvim-notify)
+      enabled = true,
+      timeout = 3000,
     },
     picker = {
-        sources = {
-            files = { hidden = true }, -- show hidden files
-            grep = { hidden = true },  -- search hidden files too
-        },
-        quickfile = { enabled = true },
-        scope = { enabled = true },
-        scroll = { enabled = true },
-        statuscolumn = { enabled = true },
-        words = { enabled = true },
-        styles = {
-            notification = {
-                -- wo = { wrap = true } -- Wrap notifications
-            },
-        },
-        win = {
+      enabled = true,
+      sources = {
+        files = { hidden = true }, -- show hidden files
+        grep = { hidden = true },  -- search hidden files too
+      },
+    },
+    quickfile = { enabled = true },
+    scope = { enabled = true },
+    scroll = { enabled = false },
+    statuscolumn = { enabled = true },
+    words = { enabled = true },
+    styles = {
+      notification = {
+        -- wo = { wrap = true } -- Wrap notifications
+      },
+    },
+            win = {
             input = {
                 keys = {
                     ["<Tab>"] = { "list_down", mode = { "i", "n" } },
@@ -63,16 +64,8 @@ https://github.com/mmuzammilhassan]],
                 },
             },
         },
-    },
-    config = function(_, opts)
-        require("snacks").setup(opts)
-        -- Make Snacks the default notify system
-        vim.notify = require("snacks").notifier.notify
-    end,
-    keys = function()
-        local Snacks = require("snacks")
-        return {
-
+  },
+  keys = {
             -- TOP PICKERS & EXPLORER
             { "<leader>se",      function() Snacks.picker.spelling() end,        desc = "spelling" },
             { "<leader><space>", function() Snacks.picker.smart() end,           desc = "Smart Find Files" },
@@ -140,6 +133,53 @@ https://github.com/mmuzammilhassan]],
             -- Other
             { "<leader>z",  function() Snacks.zen() end,                          desc = "Toggle Zen Mode", },
             { "<leader>Z",  function() Snacks.zen.zoom() end,                     desc = "Toggle Zoom", },
-        }
-    end,
+    {
+      "<leader>N",
+      desc = "Neovim News",
+      function()
+        Snacks.win({
+          file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+          width = 0.6,
+          height = 0.6,
+          wo = {
+            spell = false,
+            wrap = false,
+            signcolumn = "yes",
+            statuscolumn = " ",
+            conceallevel = 3,
+          },
+        })
+      end,
+    },
+  },
+  init = function()
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      callback = function()
+        -- Setup some globals for debugging (lazy-loaded)
+        _G.dd = function(...)
+          Snacks.debug.inspect(...)
+        end
+        _G.bt = function()
+          Snacks.debug.backtrace()
+        end
+        vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+        -- Create some toggle mappings
+        Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+        Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+        Snacks.toggle.diagnostics():map("<leader>ud")
+        Snacks.toggle.line_number():map("<leader>ul")
+        Snacks.toggle
+            .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+            :map("<leader>uc")
+        Snacks.toggle.treesitter():map("<leader>uT")
+        Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+        Snacks.toggle.inlay_hints():map("<leader>uh")
+        Snacks.toggle.indent():map("<leader>ug")
+        Snacks.toggle.dim():map("<leader>uD")
+      end,
+    })
+  end,
 }

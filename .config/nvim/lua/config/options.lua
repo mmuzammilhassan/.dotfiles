@@ -4,9 +4,6 @@ vim.g.maplocalleader = " "                              -- change localleader to
 vim.g.loaded_netrw = 1                                  -- disable netrw
 vim.g.loaded_netrwPlugin = 1                            --  disable netrw
 
--- this is ctags for php only 
--- vim.opt.tags = { "./.tags;" }
-
 vim.opt.incsearch = true                                -- make search act like search in modern browsers
 vim.opt.backup = false                                  -- creates a backup file
 vim.opt.clipboard = "unnamedplus"                       -- allows neovim to access the system clipboard
@@ -17,7 +14,7 @@ vim.opt.conceallevel = 0                                -- so that `` is visible
 vim.opt.fileencoding = "utf-8"                          -- the encoding written to a file
 vim.opt.hlsearch = true                                 -- highlight all matches on previous search pattern
 vim.opt.ignorecase = true                               -- ignore case in search patterns
---oim.opt.mouse = "a"                                     -- allow the mouse to be used in neovim
+vim.opt.mouse = "a"                                     -- allow the mouse to be used in neovim
 vim.opt.pumheight = 10                                  -- pop up menu height
 vim.opt.showmode = false                                -- we don't need to see things like -- INSERT -- anymore
 vim.opt.showtabline = 0                                 -- always show tabs
@@ -30,32 +27,31 @@ vim.opt.termguicolors = true                            -- set term gui colors (
 vim.opt.timeoutlen = 1000                               -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.undofile = true                                 -- enable persistent undo
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
---vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"     -- set an undo directory
---vim.opt.updatetime = 100                                -- faster completion (4000ms default)
-vim.opt.updatetime = 1                                -- faster completion (4000ms default)
+--vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"   -- set an undo directory
+vim.opt.updatetime = 100                                -- faster completion (4000ms default)
 vim.opt.writebackup = false                             -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.opt.expandtab = true                                -- convert tabs to spaces
 vim.opt.shiftwidth = 2                                  -- the number of spaces inserted for each indentation
+vim.opt.cursorline = false                              -- highlight the current line
+vim.opt.cursorcolumn = false                            -- highlight the current line
+vim.opt.colorcolumn = "80"
 vim.opt.number = true                                   -- set numbered lines
 vim.opt.relativenumber = true                           -- set relative numbered lines
-vim.opt.cursorline = false                              -- highlight the current line
-vim.opt.cursorcolumn = false                              -- highlight the current line
-vim.opt.colorcolumn = "80"
 vim.opt.breakindent = true                              -- wrap lines with indent
 vim.opt.numberwidth = 4                                 -- set number column width to 2 {default 4}
 vim.opt.signcolumn = "yes:1"                                                 --  show the sign column, otherwise it would shift the text each time
 vim.opt.wrap = false                                    -- display lines as one long line
 vim.opt.scrolloff = 9                                   -- Makes sure there are always eight lines of context
+vim.opt.sidescrolloff = 9                               -- Makes sure there are always eight lines of context
 vim.opt.isfname:append("@-@")
--- vim.opt.sidescrolloff = 8                               -- Makes sure there are always eight lines of context
-vim.opt.showcmd = false           -- Don't show the command in the last line
-vim.opt.ruler = true              -- Don't show the ruler
-vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
-vim.opt.title = true              -- set the title of window to the value of the titlestring
-vim.opt.confirm = true            -- confirm to save changes before exiting modified buffer
-vim.opt.fillchars = { eob = " " } -- change the character at the end of buffer
+vim.opt.showcmd = false                                 -- Don't show the command in the last line
+vim.opt.ruler = true                                    -- Don't show the ruler
+vim.opt.guifont = "monospace:h17"                       -- the font used in graphical neovim applications
+vim.opt.title = true                                    -- set the title of window to the value of the titlestring
+vim.opt.confirm = true                                  -- confirm to save changes before exiting modified buffer
+vim.opt.fillchars = { eob = " " }                       -- change the character at the end of buffer
 -- vim.opt.winborder = "rounded" -- solid, single
-vim.opt.winborder = "single"      -- https://neovim.io/doc/user/options.html#'winborder'
+vim.opt.winborder = "single"                            -- https://neovim.io/doc/user/options.html#'winborder'
 
 --Source: :help 'statuscolumn' in Neovim
 --vim.opt.statuscolumn = "%s%=%l  " -- this is awesome but not perfect
@@ -63,14 +59,12 @@ vim.opt.winborder = "single"      -- https://neovim.io/doc/user/options.html#'wi
 --vim.opt.statuscolumn = "%l    " -- this is awesome but not perfect
 --vim.opt.statuscolumn = " %l %=" -- this is awesome but not perfect
 
--- vim.opt.guicursor = ""                          -- set the cursor to be a vertical bar
 
--- vim.opt.cursorlineopt = "number"              -- set the cursorline
-vim.opt.tabstop = 4                           -- insert 2 spaces for a tab
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
--- vim.opt.laststatus = 0 -- Always display the status line
+-- vim.opt.guicursor = ""                               -- set the cursor to be a vertical bar
+
+-- vim.opt.cursorlineopt = "number"                     -- set the cursorline
+-- vim.opt.tabstop = 2                                  -- insert 2 spaces for a tab
+-- vim.opt.laststatus = 0                               -- Always display the status line
 
 vim.filetype.add({
     extension = {
