@@ -28,7 +28,8 @@ vim.opt.timeoutlen = 1000                               -- time to wait for a ma
 vim.opt.undofile = true                                 -- enable persistent undo
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 --vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"   -- set an undo directory
-vim.opt.updatetime = 100                                -- faster completion (4000ms default)
+--vim.opt.updatetime = 100                                -- faster completion (4000ms default)
+vim.opt.updatetime = 1                                -- faster completion (4000ms default)
 vim.opt.writebackup = false                             -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.opt.expandtab = true                                -- convert tabs to spaces
 vim.opt.shiftwidth = 2                                  -- the number of spaces inserted for each indentation
@@ -51,7 +52,7 @@ vim.opt.title = true                                    -- set the title of wind
 vim.opt.confirm = true                                  -- confirm to save changes before exiting modified buffer
 vim.opt.fillchars = { eob = " " }                       -- change the character at the end of buffer
 -- vim.opt.winborder = "rounded" -- solid, single
-vim.opt.winborder = "single"                            -- https://neovim.io/doc/user/options.html#'winborder'
+vim.opt.winborder = "rounded"                            -- https://neovim.io/doc/user/options.html#'winborder'
 
 --Source: :help 'statuscolumn' in Neovim
 --vim.opt.statuscolumn = "%s%=%l  " -- this is awesome but not perfect

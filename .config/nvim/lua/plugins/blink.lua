@@ -28,17 +28,22 @@ return {
                             module = "lazydev.integrations.blink",
                             score_offset = 100,
                         },
-                        -- laravel = {
-                        --     name = "laravel",
-                        --     module = "laravel.blink_source",
-                        -- },
+                        laravel = {
+                            name = "laravel",
+                            module = "laravel.blink_source",
+                        },
                         cmdline = {
                             min_keyword_length = 2,
                         },
                     },
                 },
                 keymap = {
-                    ["<C-f>"] = {},
+                    ["<Tab>"] = { "select_next", "fallback" },
+                    ["<S-Tab>"] = { "select_prev", "fallback" },
+                    ["<C-Space>"] = { "show", "fallback" },
+                    ["<CR>"] = { "accept", "fallback" },
+
+                    --                    ["<C-f>"] = {},
                 },
                 cmdline = {
                     enabled = false,

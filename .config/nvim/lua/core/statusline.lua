@@ -111,12 +111,13 @@ _G.open_git_branches = open_git_branches
 --     callback = setup_statusline_colors
 -- })
 --
+
 vim.opt.statusline = " %@v:lua.open_file_explorer@ 󰉋 %X"
     .. "%@v:lua.open_lsp_symbols@ 󰒕 %X"
     .. "%@v:lua.open_git_branches@ 󰊢 %X"
     .. " %f"
-    .. "%m"
-    .. "%r"
+    .. " %m"
+    .. " %r"
     .. "%="
     .. "%{v:lua.git_branch()}"
     .. " %{v:lua.linter_status()}"
@@ -125,4 +126,19 @@ vim.opt.statusline = " %@v:lua.open_file_explorer@ 󰉋 %X"
     .. " %l:%c"
     .. " %p%% "
 
-vim.opt.fillchars:append({ stl = "─", stlnc = "─" })
+-- vim.opt.statusline = " %@v:lua.open_file_explorer@ 󰉋 %X"
+--     .. "%@v:lua.open_lsp_symbols@ 󰒕 %X"
+--     .. "%@v:lua.open_git_branches@ 󰊢 %X"
+--     .. " %f"
+--     .. " %m"
+--     .. " %r"
+--     .. "%="
+--     .. "%{v:lua.git_branch()} |"
+--     .. " %{v:lua.linter_status()} |"
+--     .. " %{v:lua.formatter_status()} |"
+--     .. " %{v:lua.lsp_status()} |"
+--     .. " %l:%c |"
+--     .. " %p%% |"
+
+
+-- vim.opt.fillchars:append({ stl = "─", stlnc = "─" })

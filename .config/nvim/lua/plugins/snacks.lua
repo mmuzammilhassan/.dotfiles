@@ -19,13 +19,14 @@ return {
  ███     ███      ███      ███  ███   ███   ███ ███ 
 ████████ ████████ ███      ███  ███   ███   ███  ███
 
-https://github.com/mmuzammilhassan]],
+  https://github.com/mmuzammilhassan]],
       },
       sections = {
+        {index_keys = { "1", "2", "3", "4", "7", "8", "9", "0" }},
         { section = "header" },
         { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-        { icon = " ", title = "Recent Files", limit = 9, section = "recent_files", indent = 2, padding = 1 },
-        -- { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+        { icon = " ", title = "Recent Files", limit = 6, section = "recent_files", indent = 2, padding = 1 },
+        { icon = " ", title = "Projects", limit = 4, section = "projects", indent = 2, padding = 1 },
         { icon = "󰾆 ", section = "startup" },
       },
     },
