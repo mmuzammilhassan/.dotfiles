@@ -66,8 +66,8 @@ vim.keymap.set("n", "<leader>mr", "<cmd>cellularautomaton make_it_rain<cr>");
 --vim.keymap.set("n", "Wq", ":wq<CR>", { silent = true, desc = "wq" })
 
 -- restore original `s` behavior
---vim.keymap.set("n", "s", "s", { noremap = true, silent = true })
---vim.keymap.set("n", "S", "S", { noremap = true, silent = true })
+vim.keymap.set("n", "s", "s", { noremap = true, silent = true })
+vim.keymap.set("n", "S", "S", { noremap = true, silent = true })
 
 -- keymaps for resize windows with arrow keys
 vim.keymap.set('n', '<Up>', '<cmd>resize +1<cr>', { desc = "Increase Window Height" })
