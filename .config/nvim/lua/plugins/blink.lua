@@ -1,5 +1,5 @@
 return {
-    { "L3MON4D3/LuaSnip", keys = {} },
+    { "L3MON4D3/LuaSnip",keys = {} },
     {
         "saghen/blink.cmp",
         dependencies = {
@@ -38,11 +38,11 @@ return {
                     },
                 },
                 keymap = {
-                    ["<Tab>"] = { "select_next", "fallback" },
-                    ["<S-Tab>"] = { "select_prev", "fallback" },
+                    ["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
+                    ["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
+
                     ["<C-Space>"] = { "show", "fallback" },
                     ["<CR>"] = { "accept", "fallback" },
-
                     --                    ["<C-f>"] = {},
                 },
                 cmdline = {
