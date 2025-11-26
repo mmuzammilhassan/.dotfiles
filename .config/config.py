@@ -171,6 +171,9 @@ config.set('colors.webpage.darkmode.enabled', False, 'https://www.youtube.com/*'
 config.set('colors.webpage.darkmode.enabled', False, 'https://web.whatsapp.com')
 config.set('colors.webpage.darkmode.enabled', False, 'https://github.com/*')
 
+# here comes my localhost sites
+config.set('colors.webpage.darkmode.enabled', False, 'http://localhost:8001/*')
+
 config.bind('J', 'tab-prev')
 config.bind('K', 'tab-next')
 config.bind('ch', 'open -t chatgpt.com')
