@@ -5,10 +5,11 @@ static const unsigned int borderpx  = 3;        /* 2 border pixel of windows */
 static const unsigned int gappx     = 10;       /* 4 gaps between windows */
 static const unsigned int snap      = 8;        /* 32 snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
-static const int showbar            = 0;        /* 0 means no bar */
+static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
                                     /* this is bar font*/
-static const char *fonts[]          = { "FiraCode:medium:size=9", "JoyPixels:pixelsize=18:antialias=true:autohint=true"};
+//static const char *fonts[]          = { "FiraCode:medium:size=9", "JoyPixels:pixelsize=18:antialias=true:autohint=true"};
+static const char *fonts[]          = { "FiraCode:medium:size=14", "JoyPixels:pixelsize=18:antialias=true:autohint=true"};
                                     /* this is dmenu font*/
 static const char dmenufont[]       = "FiraCode:medium:size=18";
 static char normbgcolor[]           ="#222222";  // "#0a0410";  bar bg color
