@@ -170,6 +170,7 @@ config.set('colors.webpage.darkmode.enabled', True)
 config.set('colors.webpage.darkmode.enabled', False, 'https://www.youtube.com/*')
 config.set('colors.webpage.darkmode.enabled', False, 'https://web.whatsapp.com')
 config.set('colors.webpage.darkmode.enabled', False, 'https://github.com/*')
+config.set('colors.webpage.darkmode.enabled', False, 'https://start.duckduckgo.com/*')
 
 # here comes my localhost sites
 config.set('colors.webpage.darkmode.enabled', False, 'http://localhost:8001/*')
@@ -179,4 +180,4 @@ config.bind('K', 'tab-next')
 config.bind('ch', 'open -t chatgpt.com')
 config.bind('wh', 'open -t web.whatsapp.com')
 config.bind('yt', 'open -t youtube.com')
-config.bind('am', 'open -t localhost:3000/?server=db&username=root')
+config.bind('ad', 'open -t localhost:3000/?server=db&username=root')

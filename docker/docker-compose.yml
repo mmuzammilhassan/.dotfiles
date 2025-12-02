@@ -5,7 +5,7 @@ networks:
 
 services:
   # Shared MariaDB
-  db: # this is the host = "db"
+  db: # THIS IS THE HOST = "db"
     image: mariadb:11
     container_name: infra_db
     restart: always

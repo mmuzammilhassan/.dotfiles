@@ -9,7 +9,8 @@ return {
       require("rose-pine").setup({
         variant = "moon", -- options: "dawn", "moon", "main"
         dark_variant = "moon",
-        styles = { transparency = true } })
+        styles = { transparency = true }
+      })
 
       vim.cmd("colorscheme rose-pine")
       -- vim.api.nvim_set_hl(0, "Normal", { bg = "#0a0410" })
