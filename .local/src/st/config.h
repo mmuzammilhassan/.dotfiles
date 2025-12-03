@@ -12,7 +12,7 @@ static char *font = "FiraCode:medium:pixelsize=18:antialias=true:autohint=true";
 static char *font2[] = { "FiraCode:medium:pixelsize=18:antialias=true:autohint=true" };
 
 // Default line spacing (in pixels)
-static int linespacing = 6;
+static int linespacing = 4;
 static const int defaultlinespacing = 4;
 static const int maxlinespacing = 20;  // Optional upper limit
 

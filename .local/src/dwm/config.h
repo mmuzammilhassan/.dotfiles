@@ -9,7 +9,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
                                     /* this is bar font*/
 //static const char *fonts[]          = { "FiraCode:medium:size=9", "JoyPixels:pixelsize=18:antialias=true:autohint=true"};
-static const char *fonts[]          = { "FiraCode:medium:size=14", "JoyPixels:pixelsize=18:antialias=true:autohint=true"};
+static const char *fonts[]          = { "FiraCode:medium:size=12", "JoyPixels:pixelsize=16:antialias=true:autohint=true"};
                                     /* this is dmenu font*/
 static const char dmenufont[]       = "FiraCode:medium:size=18";
 static char normbgcolor[]           ="#222222";  // "#0a0410";  bar bg color
