@@ -16,6 +16,15 @@ return {
             desc = "Format buffer",
         },
     },
+
+    formatters = {
+        -- Define a custom formatter that runs Pint inside DDEV
+        ddev_pint = {
+            command = "ddev",
+            args = { "exec", "./vendor/bin/pint", "$FILENAME" },
+            stdin = false, -- Pint modifies the file in place
+        },
+    },
     opts = {
         formatters_by_ft = {
             -- Go
@@ -41,7 +50,8 @@ return {
             python = { "isort", "black" },
 
             -- PHP/Laravel
-            php = { "pint" },
+            --php = { "pint" },
+            php = { "ddev_pint" },
 
             -- Shell
             sh = { "shfmt" },

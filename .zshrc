@@ -198,6 +198,8 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$HOME/apps:$PATH"
 export PATH="/usr/bin:$PATH"
 export TERM=xterm-256color
+# THIS IS FOR COMPOSER COMMONDS
+# export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
 # force blinking block cursor on shell prompt 
 # added this line cause tmux not supporting cursor blinking
@@ -211,3 +213,75 @@ bindkey -s '\ef' "tmux-sessionizer\n"
 #bindkey -s '\et' "tmux-sessionizer -t 1\n"
 #bindkey -s '\en' "tmux-sessionizer -t 2\n"
 #bindkey -s '\es' "tmux-sessionizer -t 3\n"
+
+# Usage: laravel-new my-app
+laravel-new() {
+    if [ -z "$1" ]; then
+        echo "❌ Usage: laravel-new <project-name>"
+        return 1
+    fi
+
+    echo "🚀 Setting up Laravel Project: $1"
+    mkdir -p "$1" && cd "$1"
+
+    # 1. Configure & Start
+    ddev config --project-type=laravel --docroot=public --create-docroot
+    ddev start
+
+    # 2. Install Laravel (Standard)
+    echo "📦 Downloading Laravel..."
+    ddev composer create --prefer-dist laravel/laravel .
+
+    # 3. Install IDE Helper (For Neovim Autocomplete)
+    echo "🧠 Installing Neovim Helpers..."
+    ddev composer require --dev barryvdh/laravel-ide-helper
+    
+    # 4. Generate Helper Files
+    # We allow these to fail gracefully (|| true) just in case the app isn't perfectly ready, 
+    # so it doesn't stop the whole script.
+    ddev artisan ide-helper:generate || true
+    ddev artisan ide-helper:meta || true
+    ddev artisan ide-helper:models -N || true
+
+    # 5. Finalize
+    ddev artisan key:generate
+    ddev artisan migrate
+    
+    echo "✅ Done! User: admin / Pass: password (if using Breeze later)"
+    ddev launch
+}
+
+wordpress-new() {
+    if [ -z "$1" ]; then
+        echo "❌ Usage: wordpress-new <project-name>"
+        return 1
+    fi
+
+    echo "🚀 Setting up WordPress Project: $1"
+    mkdir -p "$1" && cd "$1"
+
+    # 1. Configure & Start
+    ddev config --project-type=wordpress
+    ddev start
+
+    # 2. Download WordPress Core
+    echo "📦 Downloading WordPress..."
+    ddev wp core download
+
+    # 3. Install WordPress (The "5-minute install" automated)
+    # We set generic admin/password credentials. Change these later!
+    echo "⚙️  Installing Database..."
+    ddev wp core install \
+        --url="$1.ddev.site" \
+        --title="$1 Development" \
+        --admin_user="admin" \
+        --admin_password="password" \
+        --admin_email="admin@example.com"
+
+    echo "✅ WordPress Installed!"
+    echo "🔑 Admin Panel: https://$1.ddev.site/wp-admin"
+    echo "👤 User: admin"
+    echo "🔑 Pass: password"
+    
+    ddev launch
+}

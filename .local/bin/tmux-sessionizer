@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# Pick directory
-#selected=$(find ~/projects/php/phpoop/ ~/projects/php/phpoop/gio ~/projects -maxdepth 3 -type d 2>/dev/null | fzf)
-#selected=$(find ~/projects/php/phpoop/ -maxdepth 3 -type d 2>/dev/null | fzf)
-selected=$(find ~/projects/php/phpoop/ -maxdepth 1 -type d 2>/dev/null | fzf)
+## Pick directory
+## selected=$(find ~/projects/php/phpoop/ ~/projects/php/phpoop/gio ~/projects -maxdepth 3 -type d 2>/dev/null | fzf)
+## selected=$(find ~/projects/php/phpoop/ -maxdepth 3 -type d 2>/dev/null | fzf)
+#selected=$(find ~/projects/php/phpoop/ -maxdepth 1 -type d 2>/dev/null | fzf)
+selected=$(find ~/projects/php/ -maxdepth 3 -type d 2>/dev/null | fzf)
 [[ -z "$selected" ]] && exit 0
 
 # Session name (no dots)
