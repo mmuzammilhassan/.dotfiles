@@ -52,6 +52,8 @@ return {
             -- PHP/Laravel
             --php = { "pint" },
             php = { "ddev_pint" },
+            -- Blade uses blade-formatter (Local Node tool - fast & pretty)
+            blade = { "blade-formatter" },
 
             -- Shell
             sh = { "shfmt" },
