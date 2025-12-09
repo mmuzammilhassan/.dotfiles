@@ -29,5 +29,3 @@ return {
     -- vim.keymap.set("n", "<leader>", function() harpoon:list():next() end)
   end,
 }
-
-
