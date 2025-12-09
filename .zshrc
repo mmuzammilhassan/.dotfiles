@@ -217,11 +217,11 @@ bindkey -s '\ef' "tmux-sessionizer\n"
 # Usage: laravel-new my-app
 laravel-new() {
     if [ -z "$1" ]; then
-        echo "❌ Usage: laravel-new <project-name>"
+        echo "Usage: laravel-new <project-name>"
         return 1
     fi
 
-    echo "🚀 Setting up Laravel Project: $1"
+    echo "Setting up Laravel Project: $1"
     mkdir -p "$1" && cd "$1"
 
     # 1. Configure & Start
@@ -229,11 +229,13 @@ laravel-new() {
     ddev start
 
     # 2. Install Laravel (Standard)
-    echo "📦 Downloading Laravel..."
-    ddev composer create --prefer-dist laravel/laravel .
+    echo "Downloading Laravel..."
+#    ddev composer create --prefer-dist laravel/laravel .
+    ddev composer create-project --prefer-dist laravel/laravel .
+
 
     # 3. Install IDE Helper (For Neovim Autocomplete)
-    echo "🧠 Installing Neovim Helpers..."
+    echo "Installing Neovim Helpers..."
     ddev composer require --dev barryvdh/laravel-ide-helper
     
     # 4. Generate Helper Files
@@ -247,17 +249,17 @@ laravel-new() {
     ddev artisan key:generate
     ddev artisan migrate
     
-    echo "✅ Done! User: admin / Pass: password (if using Breeze later)"
+    echo "Done! User: admin / Pass: password (if using Breeze later)"
     ddev launch
 }
 
 wordpress-new() {
     if [ -z "$1" ]; then
-        echo "❌ Usage: wordpress-new <project-name>"
+        echo "Usage: wordpress-new <project-name>"
         return 1
     fi
 
-    echo "🚀 Setting up WordPress Project: $1"
+    echo "Setting up WordPress Project: $1"
     mkdir -p "$1" && cd "$1"
 
     # 1. Configure & Start
@@ -265,12 +267,12 @@ wordpress-new() {
     ddev start
 
     # 2. Download WordPress Core
-    echo "📦 Downloading WordPress..."
+    echo "Downloading WordPress..."
     ddev wp core download
 
     # 3. Install WordPress (The "5-minute install" automated)
     # We set generic admin/password credentials. Change these later!
-    echo "⚙️  Installing Database..."
+    echo "Installing Database..."
     ddev wp core install \
         --url="$1.ddev.site" \
         --title="$1 Development" \

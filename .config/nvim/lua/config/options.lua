@@ -7,7 +7,7 @@ vim.g.loaded_netrwPlugin = 1                            --  disable netrw
 vim.opt.incsearch = true                                -- make search act like search in modern browsers
 vim.opt.backup = false                                  -- creates a backup file
 vim.opt.clipboard = "unnamedplus"                       -- allows neovim to access the system clipboard
-vim.opt.clipboard = "unnamed"                       -- allows neovim to access the system clipboard
+vim.opt.clipboard = "unnamed"                           -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 1                                   -- more space in the neovim command line for displaying messages
 vim.opt.completeopt = { "menu", "menuone", "noselect" } -- mostly just for cmp
 vim.opt.conceallevel = 0                                -- so that `` is visible in markdown files
@@ -28,19 +28,19 @@ vim.opt.timeoutlen = 1000                               -- time to wait for a ma
 vim.opt.undofile = true                                 -- enable persistent undo
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 --vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"   -- set an undo directory
---vim.opt.updatetime = 100                                -- faster completion (4000ms default)
-vim.opt.updatetime = 1                                -- faster completion (4000ms default)
+--vim.opt.updatetime = 100                              -- faster completion (4000ms default)
+vim.opt.updatetime = 1                                  -- faster completion (4000ms default)
 vim.opt.writebackup = false                             -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.opt.expandtab = true                                -- convert tabs to spaces
 vim.opt.shiftwidth = 2                                  -- the number of spaces inserted for each indentation
 vim.opt.cursorline = false                              -- highlight the current line
 vim.opt.cursorcolumn = false                            -- highlight the current line
 vim.opt.colorcolumn = "80"
-vim.opt.number = true                                   -- set numbered lines
-vim.opt.relativenumber = true                           -- set relative numbered lines
+--vim.opt.number = true                                 -- set numbered lines
+--vim.opt.relativenumber = true                         -- set relative numbered lines
 vim.opt.breakindent = true                              -- wrap lines with indent
 vim.opt.numberwidth = 4                                 -- set number column width to 2 {default 4}
-vim.opt.signcolumn = "yes:1"                                                 --  show the sign column, otherwise it would shift the text each time
+vim.opt.signcolumn = "yes:1"                            --  show the sign column, otherwise it would shift the text each time
 vim.opt.wrap = false                                    -- display lines as one long line
 vim.opt.scrolloff = 9                                   -- Makes sure there are always eight lines of context
 vim.opt.sidescrolloff = 9                               -- Makes sure there are always eight lines of context
@@ -52,13 +52,13 @@ vim.opt.title = true                                    -- set the title of wind
 vim.opt.confirm = true                                  -- confirm to save changes before exiting modified buffer
 vim.opt.fillchars = { eob = " " }                       -- change the character at the end of buffer
 -- vim.opt.winborder = "rounded" -- solid, single
-vim.opt.winborder = "rounded"                            -- https://neovim.io/doc/user/options.html#'winborder'
+vim.opt.winborder = "rounded"                           -- https://neovim.io/doc/user/options.html#'winborder'
 
 --Source: :help 'statuscolumn' in Neovim
---vim.opt.statuscolumn = "%s%=%l  " -- this is awesome but not perfect
---vim.opt.statuscolumn = " %l %=%s" -- this is awesome but not perfect
---vim.opt.statuscolumn = "%l    " -- this is awesome but not perfect
---vim.opt.statuscolumn = " %l %=" -- this is awesome but not perfect
+--vim.opt.statuscolumn = "%s%=%l  "
+--vim.opt.statuscolumn = " %l %=%s"
+--vim.opt.statuscolumn = "%l    "
+--vim.opt.statuscolumn = " %l %="
 
 
 -- vim.opt.guicursor = ""                               -- set the cursor to be a vertical bar
