@@ -1,0 +1,18 @@
+#!/bin/sh
+
+counter=0
+
+while :; do
+  frame=$((counter % 3))
+
+  case $frame in
+    0) icon="ᗧ  • •" ;;
+    1) icon=" ᗧ • •" ;;
+    2) icon="  ᗧ• •" ;;
+  esac
+
+  counter=$((counter + 1))
+
+  tmux set-option -g status-right "$icon"
+  sleep 0.5
+done

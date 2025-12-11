@@ -1,0 +1,21 @@
+#!/bin/sh
+
+blink=0.5
+
+while :; do
+
+  if [ "$blink" -eq 1 ]; then
+    # State 1
+    icon="❤️ "
+    blink=0
+  else
+    # State 2 (Empty or different color)
+    icon="🤍" 
+    blink=1
+  fi
+
+  # Update Tmux
+  tmux set-option -g status-right "$icon"
+  
+  sleep 1
+done

@@ -42,10 +42,10 @@ static const Rule rules[] = {
     { "TelegramDesktop",    NULL,     NULL,           0,         1,          0,           0,        -1 },
     { "obs",                NULL,     NULL,           0,         1,          0,           0,        -1 },
     { "Lutris",             NULL,     NULL,           0,         1,          0,           0,        -1 },
-    { "qutebrowser",	    NULL,     NULL,           1 << 0,    0,          0,          -1,        -1 },
-    { "Chromium",   	    NULL,     NULL,           1 << 1,    0,          0,          -1,        -1 },
+    // { "qutebrowser",	    NULL,     NULL,           1 << 0,    0,          0,          -1,        -1 },
+    { "Chromium",   	    NULL,     NULL,           1 << 0,    0,          0,          -1,        -1 },
     //{ "Brave",   	    NULL,     NULL,           1 << 1,    0,          0,          -1,        -1 },
-    { "firefox",   	    NULL,     NULL,           1 << 2,    0,          0,          -1,        -1 },
+    { "firefox",   	    NULL,     NULL,           1 << 1,    0,          0,          -1,        -1 },
     //{ "code",             NULL,     NULL,           1 << 4,    0,          0,          -1,        -1 },
     // { "beekeeper-studio",   NULL,     NULL,           1 << 5,    0,          0,          -1,        -1 },
     { "St",                 NULL,     NULL,           0,         0,          1,           0,        -1 },
@@ -94,7 +94,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      5)
 	TAGKEYS(                        XK_9,                      6)
 //	TAGKEYS(                        XK_8,                      7)
-//  TAGKEYS(                        XK_9,                      8)
+//	TAGKEYS(                        XK_9,                      8)
 
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
