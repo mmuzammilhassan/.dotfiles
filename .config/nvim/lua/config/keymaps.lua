@@ -137,8 +137,8 @@ vim.keymap.set("n", "YY", "va{Vy", opts)
 -- vim.keymap.set("n", "k", "gk", opts)
 
 -- Exit on jj and jk
-vim.keymap.set("i", "jj", "<ESC>", opts)
-vim.keymap.set("i", "jk", "<ESC>", opts)
+-- vim.keymap.set("i", "jj", "<ESC>", opts)
+-- vim.keymap.set("i", "jk", "<ESC>", opts)
 
 -- Move to start/end of line
 vim.keymap.set({ "n", "x", "o" }, "H", "^", opts)
