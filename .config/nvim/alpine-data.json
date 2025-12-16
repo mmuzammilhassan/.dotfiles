@@ -1,0 +1,21 @@
+{
+  "version": 1.1,
+  "globalAttributes": [
+    { "name": "x-data", "description": "Declare a new Alpine component." },
+    { "name": "x-init", "description": "Run code when an element is initialized." },
+    { "name": "x-show", "description": "Toggle the visibility of an element." },
+    { "name": "x-bind", "description": "Dynamically set HTML attributes." },
+    { "name": "x-on", "description": "Listen for browser events." },
+    { "name": "x-text", "description": "Set the text content of an element." },
+    { "name": "x-html", "description": "Set the inner HTML of an element." },
+    { "name": "x-model", "description": "Synchronize a piece of data with an input element." },
+    { "name": "x-for", "description": "Repeat a block of HTML based on a data set." },
+    { "name": "x-transition", "description": "Transition an element in and out." },
+    { "name": "x-effect", "description": "Execute a script each time dependencies change." },
+    { "name": "x-ignore", "description": "Prevent a block of HTML from being initialized." },
+    { "name": "x-cloak", "description": "Hide a block of HTML until Alpine is initialized." },
+    { "name": "x-teleport", "description": "Transport part of your Alpine template to another part of the DOM." },
+    { "name": "x-if", "description": "Conditionally add/remove a block of HTML." },
+    { "name": "x-id", "description": "Declare a new scope for $id()." }
+  ]
+}

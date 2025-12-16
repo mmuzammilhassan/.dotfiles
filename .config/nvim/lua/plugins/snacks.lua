@@ -6,22 +6,23 @@ return {
   opts = {
     bigfile = { enabled = true },
     dashboard = {
+        index_keys = { "1", "2", "3", "4", "7", "8", "9", "0" },
       preset = {
         --Welcome back, Zephyr
-        -- ____   ____   ____   _   _   _  _   ____
-        --(_   ) ( ___) (  _ \ ( )_( ) ( \/ ) (  _ \
-        -- / /_   )__)   )___/  ) _ (   \  /   )   /
-        --(____) (____) (__)   (_) (_)  (__)  (_)\_)]],
+-- [[████████ ████████ ███████  ███  ███ ███ ███ ███████ 
+--      ███ ███      ███  ███ ███  ███ ███ ███ ███  ███
+--    ███   ██████   ███████  ████████  █████  ███████ 
+--  ███     ███      ███      ███  ███   ███   ███ ███ 
+-- ████████ ████████ ███      ███  ███   ███   ███  ███
         header =
-[[████████ ████████ ███████  ███  ███ ███ ███ ███████ 
-     ███ ███      ███  ███ ███  ███ ███ ███ ███  ███
-   ███   ██████   ███████  ████████  █████  ███████ 
- ███     ███      ███      ███  ███   ███   ███ ███ 
-████████ ████████ ███      ███  ███   ███   ███  ███]],
-},
---  https://github.com/mmuzammilhassan]],
+[[____   ____   ____   _   _   _  _   ____
+(_   ) ( ___) (  _ \ ( )_( ) ( \/ ) (  _ \
+ / /_   )__)   )___/  ) _ (   \  /   )   /
+(____) (____) (__)   (_) (_)  (__)  (_)\_)
+
+  https://github.com/mmuzammilhassan]],
+      },
       sections = {
-        {index_keys = { "1", "2", "3", "4", "7", "8", "9", "0" }},
         { section = "header" },
         { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
         { icon = " ", title = "Recent Files", limit = 6, section = "recent_files", indent = 2, padding = 1 },
@@ -30,22 +31,44 @@ return {
       },
     },
 
-    explorer = { enabled = true },
+
     indent = { enabled = false },
     input = { enabled = true },
+
     notifier = {
       -- max_width = 60,
       top_down = false, -- grow notifications upward (like nvim-notify)
       enabled = true,
       timeout = 3000,
     },
+
+    -- explorer
     picker = {
-      enabled = true,
-      sources = {
-        files = { hidden = true }, -- show hidden files
-        grep = { hidden = true },  -- search hidden files too
+    enabled = true,
+    sources = {
+      files = { hidden = true },
+      grep = { hidden = true },
+      explorer = {
+        -- Your Explorer Config (Correctly setup now)
+        layout = {
+          preset = "sidebar",
+          layout = {
+            position = "right",
+          },
+        },
       },
     },
+    -- 2. "win" must be inside "picker" to control picker keymaps
+    win = {
+      input = {
+        keys = {
+          ["<Tab>"] = { "list_down", mode = { "i", "n" } },
+          ["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
+        },
+      },
+    },
+  },
+
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = false },
@@ -56,14 +79,6 @@ return {
         -- wo = { wrap = true } -- Wrap notifications
       },
     },
-            win = {
-            input = {
-                keys = {
-                    ["<Tab>"] = { "list_down", mode = { "i", "n" } },
-                    ["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
-                },
-            },
-        },
   },
   keys = {
             -- TOP PICKERS & EXPLORER

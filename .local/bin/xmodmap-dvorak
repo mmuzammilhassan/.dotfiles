@@ -3,7 +3,10 @@
 xmodmap -e "keycode 66 = Mode_switch"
 
 # alt_R is Caps_Lock
-xmodmap -e "keycode 108 = Caps_Lock"
+#xmodmap -e "keycode 108 = Caps_Lock"
+
+# alt_R is Caps_Lock
+xmodmap -e "keycode 108 = space"
 
 # Set Space as a dual-purpose key (regular space + Mode_switch)
 xmodmap -e "keycode 65 = space Mode_switch"
@@ -22,13 +25,11 @@ xmodmap -e "keysym l = l L Right"
 
 # Map additional keys with Mode_switch
 xmodmap -e "keysym u = u U BackSpace"    # Mode_key + u -> Backspace
-
-## Map additional keys with Escape, Return
+xmodmap -e "keysym o = o O Delete"       # Mode_key + o -> Delete
 xmodmap -e "keysym b = b B Return"       # Mode_key + b -> Return/Enter
 xmodmap -e "keysym e = e E Escape"       # Mode_key + e -> esc
-xmodmap -e "keysym o = o O Delete"       # Mode_key + o -> Delete
 
-#xmodmap -e "keysym r = r R Tab"          # Mode_key + r -> Tab
+#xmodmap -e "keysym r = r R space"          # Mode_key + r -> space
 xmodmap -e "keysym c = c C dollar"          # Mode_key + r -> $
 
 xmodmap -e "keysym y = y Y braceleft"    # Mode_key + y -> {

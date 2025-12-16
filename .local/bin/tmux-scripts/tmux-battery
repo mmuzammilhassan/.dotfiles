@@ -22,25 +22,25 @@ while :; do
 
   # Blink logic
   if [ "$blink" -eq 1 ]; then
-    batt=" $icon $warn$capacity%"
+    batt="$icon $warn$capacity%"
     blink=0
   else
-    batt="   $warn$capacity%"
+    batt="  $warn$capacity%"
     blink=1
   fi
 
   # Internet (optional): run your existing script or command here
-  # net=$(~/.local/bin/internet1)
+   net=$(~/.local/bin/sb-internet)
 #  nettraf=$(~/.local/bin/nettraf)
 
   # Date/time
   #datetime=$(date +" %a-%d %I:%M%P %m-%b")
 #  datetime=$(date +" %H:%M  %d-%a")
-  # datetime=$(date +" %H:%M  %a-%d-%b")
+   datetime=$(date +"%H:%M] [%a %d %b")
 
   # Final output
   #tmux set-option -g status-right "$batt $net $nettraf $datetime"
-  tmux set-option -g status-right "$batt $net $datetime"
+  tmux set-option -g status-right "[$batt] [$net] [$datetime]"
 
   sleep 1
 done
