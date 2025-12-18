@@ -1,8 +1,10 @@
 local opts = { noremap = true, silent = true }
 -- local map = vim.keymap.set
 
--- this is my old keymaps/remaps
+-- this is custom for php {{ }}
+vim.keymap.set("n", ",h", "i{{  }}<Esc>3ha", { noremap = true, silent = true })
 
+-- this is my old keymaps/remaps
 -- Keep cursor centered when scrolling
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -10,6 +12,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+-- not sure how to use this
 vim.keymap.set("n", "*", "*zzv", opts)
 vim.keymap.set("n", "#", "#zzv", opts)
 vim.keymap.set("n", "g*", "g*zz", opts)

@@ -36,11 +36,11 @@ while :; do
   # Date/time
   #datetime=$(date +" %a-%d %I:%M%P %m-%b")
 #  datetime=$(date +" %H:%M  %d-%a")
-   datetime=$(date +"%H:%M] [%a %d %b")
+   datetime=$(date +"%H:%M | %a %d %b")
 
   # Final output
   #tmux set-option -g status-right "$batt $net $nettraf $datetime"
-  tmux set-option -g status-right "[$batt] [$net] [$datetime]"
+  tmux set-option -g status-right "$batt | $net| $datetime"
 
   sleep 1
 done

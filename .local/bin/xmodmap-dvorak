@@ -3,10 +3,10 @@
 xmodmap -e "keycode 66 = Mode_switch"
 
 # alt_R is Caps_Lock
-#xmodmap -e "keycode 108 = Caps_Lock"
+xmodmap -e "keycode 108 = Caps_Lock"
 
 # alt_R is Caps_Lock
-xmodmap -e "keycode 108 = space"
+#xmodmap -e "keycode 108 = space"
 
 # Set Space as a dual-purpose key (regular space + Mode_switch)
 xmodmap -e "keycode 65 = space Mode_switch"
