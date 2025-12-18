@@ -1,0 +1,37 @@
+--local dap = require("dap")
+--
+--dap.adapters.php = {
+--    type = "executable",
+--    command = "node",
+--    args = { os.getenv("HOME") .. "/.local/share/nvim/dap_adapters/php-debug/out/phpDebug.js" },
+--}
+--
+--dap.configurations.php = {
+--    {
+--        type = "php",
+--        request = "launch",
+--        name = "Listen for Xdebug",
+--        port = 9003,
+--        pathMappings = {
+--            ["/var/www/html"] = "${workspaceFolder}", -- adjust based on container/host path
+--        },
+--    },
+--}
+--
+--vim.keymap.set("n", "<leader>dc", function() require("dap").continue() end)
+--vim.keymap.set("n", "<leader>di", function() require("dap").step_into() end)
+--vim.keymap.set("n", "<leader>do", function() require("dap").step_over() end)
+--vim.keymap.set("n", "<leader>dO", function() require("dap").step_out() end)
+--vim.keymap.set("n", "<leader>dr", function()
+--    require("dap").terminate()
+--    vim.defer_fn(function() require("dap").run_last() end, 500)
+--end)
+--
+--vim.keymap.set("n", "<Leader>b", function() require("dap").toggle_breakpoint() end)
+--vim.keymap.set("n", "<Leader>gb", function() require("dap").run_to_cursor() end)
+--vim.keymap.set("n", "<Leader>B", function()
+--    require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+--end)
+--vim.keymap.set("n", "<Leader>?", function()
+--    require("dapui").eval(nil, { enter = true })
+--end)
