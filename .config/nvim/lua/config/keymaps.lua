@@ -2,7 +2,7 @@ local opts = { noremap = true, silent = true }
 -- local map = vim.keymap.set
 
 -- this is custom for php {{ }}
-vim.keymap.set("n", ",h", "i{{  }}<Esc>3ha", { noremap = true, silent = true })
+vim.keymap.set("n", ",h", "a{{ $ }}<Esc>3ha", { noremap = true, silent = true })
 
 -- this is my old keymaps/remaps
 -- Keep cursor centered when scrolling

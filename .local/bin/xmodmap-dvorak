@@ -24,17 +24,17 @@ xmodmap -e "keysym l = l L Right"
 #xmodmap -e "keysym n = n N Right"
 
 # Map additional keys with Mode_switch
-xmodmap -e "keysym u = u U BackSpace"    # Mode_key + u -> Backspace
-xmodmap -e "keysym o = o O Delete"       # Mode_key + o -> Delete
-xmodmap -e "keysym b = b B Return"       # Mode_key + b -> Return/Enter
-xmodmap -e "keysym e = e E Escape"       # Mode_key + e -> esc
+xmodmap -e "keysym u = u U BackSpace"   # Mode_key + u -> Backspace
+xmodmap -e "keysym o = o O Delete"      # Mode_key + o -> Delete
+xmodmap -e "keysym b = b B Return"      # Mode_key + b -> Return/Enter
+xmodmap -e "keysym e = e E Escape"      # Mode_key + e -> esc
 
-#xmodmap -e "keysym r = r R space"          # Mode_key + r -> space
-xmodmap -e "keysym c = c C dollar"          # Mode_key + r -> $
+#xmodmap -e "keysym r = r R space"      # Mode_key + r -> space
+xmodmap -e "keysym c = c C dollar"      # Mode_key + r -> $
 
-xmodmap -e "keysym y = y Y braceleft"    # Mode_key + y -> {
-xmodmap -e "keysym p = p P parenleft"  # Mode_key + p -> (
-xmodmap -e "keysym i = i I bracketleft"    # Mode_key + i -> [
-xmodmap -e "keysym d = d D bracketright"   # Mode_key + d -> ]
-xmodmap -e "keysym g = g G parenright" # Mode_key + g -> )
-xmodmap -e "keysym f = f F braceright"   # Mode_key + f -> }
+xmodmap -e "keysym p = p P bracketleft" # Mode_key + p -> [
+xmodmap -e "keysym y = y Y bracketright"  # Mode_key + y -> ]
+xmodmap -e "keysym i = i I parenleft"    # Mode_key + i -> (
+xmodmap -e "keysym d = d D parenright"   # Mode_key + d -> )
+xmodmap -e "keysym f = f F braceleft"    # Mode_key + f -> }
+xmodmap -e "keysym g = g G braceright"   # Mode_key + g -> {

@@ -6,7 +6,6 @@ return {
   opts = {
     bigfile = { enabled = true },
     dashboard = {
-        index_keys = { "1", "2", "3", "4", "7", "8", "9", "0" },
       preset = {
         --Welcome back, Zephyr
 -- [[████████ ████████ ███████  ███  ███ ███ ███ ███████ 
@@ -15,21 +14,23 @@ return {
 --  ███     ███      ███      ███  ███   ███   ███ ███ 
 -- ████████ ████████ ███      ███  ███   ███   ███  ███
 --
--- [[____   ____   ____   _   _   _  _   ____
--- (_   ) ( ___) (  _ \ ( )_( ) ( \/ ) (  _ \
---  / /_   )__)   )___/  ) _ (   \  /   )   /
--- (____) (____) (__)   (_) (_)  (__)  (_)\_)]],
-        header ="  https://github.com/mmuzammilhassan",
+-- -------------------------------------
+--  https://github.com/mmuzammilhassan
+header =
+[[____  ____  ____  _   _  _  _  ____ 
+(_   )( ___)(  _ \( )_( )( \/ )(  _ \
+ / /_  )__)  )___/ ) _ (  \  /  )   /
+(____)(____)(__)  (_) (_) (__) (_)\_)]],
       },
       sections = {
         { section = "header" },
+        index_keys = { "1", "2", "3", "4", "7", "8", "9", "0" },
         { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-        { icon = " ", title = "Recent Files", limit = 6, section = "recent_files", indent = 2, padding = 1 },
+        { icon = " ", title = "Recent Files", limit = 4, section = "recent_files", indent = 2, padding = 1 },
         { icon = " ", title = "Projects", limit = 4, section = "projects", indent = 2, padding = 1 },
         { icon = "󰾆 ", section = "startup" },
       },
     },
-
     indent = { enabled = false },
     input = { enabled = true },
 
