@@ -7,6 +7,8 @@
  */
 //static char *font = "JetBrains Mono:extrabold:pixelsize=16:antialias=true:autohint=true";
 //static char *font2[] = { "JoyPixels:extrabold:pixelsize=16:antialias=true:autohint=true" };
+// static char *font = "JetBrainsMonoNLNerdFontMono:medium:pixelsize=18:antialias=true:autohint=true";
+// static char *font2[] = { "JetBrainsMonoNLNerdFontMono:medium:pixelsize=18:antialias=true:autohint=true" };
 
 static char *font = "FiraCode:medium:pixelsize=18:antialias=true:autohint=true";
 static char *font2[] = { "FiraCode:medium:pixelsize=18:antialias=true:autohint=true" };

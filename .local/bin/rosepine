@@ -5,8 +5,8 @@ MODE=$1   # pass "dark" or "light" when running the script
 if [ "$MODE" = "dark" ]; then
 #wall=$(find ~/pix/carlos/ -type f -name "*.jpeg" -o -name "*.jpg" -o -name "*.png" | shuf -n 1)
     #wall=~/pix/dds/digital-art-boy-dark.jpg
-    #wall=~/pix/carlos/wallhaven-1pdqdv.jpg
-    wall=~/pix/carlos/wallhaven-poko7j.jpg
+    wall=~/pix/carlos/wallhaven-1pdqdv.jpg
+    #wall=~/pix/carlos/wallhaven-poko7j.jpg
     xwallpaper --zoom "$wall"
 
     wal -c

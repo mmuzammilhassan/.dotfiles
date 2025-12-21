@@ -116,6 +116,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", opts)
 
 -- Fast saving
 vim.keymap.set("n", "<leader>w", ":write!<CR>", { silent = true, desc = "Save file" })
+vim.keymap.set("n", "<leader>x", ":x<CR>", { silent = true, desc = "Save & Exit file" })
 vim.keymap.set("n", "<leader>q", ":q!<CR>", opts)
 
 -- Remap for dealing with visual line wraps

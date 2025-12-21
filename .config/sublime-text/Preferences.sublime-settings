@@ -1,0 +1,44 @@
+{
+    // --- Appearance ---
+    // "theme": "Rosé Pine.sublime-theme",
+    "theme": "Adaptive.sublime-theme",
+    "color_scheme": "Rosé Pine.sublime-color-scheme",
+    //"font_face": "JetBrains Mono",
+    "font_face": "Fira Code",
+    "font_size": 14,
+    "overlay_scroll_bars": "enabled",  // this will remove the scrollbar from the right
+    "hide_tab_scrolling_buttons": false,
+
+    // --- Minimalism (Neovim Vibe) ---
+    "draw_minimap": false,          // This hides the minimap
+    "always_show_minimap_viewport": false,
+    "mini_diff": false,             // Hides git markers in minimap area
+    "show_tabs": false,             // Hides top tabs
+    "show_git_status": false,       // Hides git dots in gutter
+    "window_menu": false,           // Hides top menu bar
+    "gutter": false,                // Hides the left side gutter completely
+    "line_numbers": false,
+    "fold_buttons": false,
+    "margin": 0,
+
+    // --- Cursor & Layout ---
+    "caret_style": "blink",
+    "block_caret": true,
+    "caret_extra_top": 2,
+    "caret_extra_bottom": 2,
+    "caret_extra_width": 2,         // Set to 0 so the block cursor isn't too fat
+//    "caret_extra_width": 10,         // Set to 0 so the block cursor isn't too fat
+    "highlight_line": true,          // Set hightlight_line
+    "line_padding_bottom": 4,
+    "line_padding_top": 4,
+    "word_wrap": false,
+
+    // --- Behavior ---
+    "save_on_focus_lost": true,     // FIXED (was savo_on_focus_lost)
+    "index_files": true,
+
+    // --- Vim Mode ---
+    "ignored_packages": [
+    ],
+    "vintage_start_in_command_mode": true,
+}
