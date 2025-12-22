@@ -11,7 +11,7 @@ local function lsp_status_short()
         table.insert(names, client.name)
     end
 
-    return "󰒋 " .. table.concat(names, ",")
+    return "󰒋 " .. table.concat(names, "|")
 end
 
 -- local function git_branch()
@@ -44,8 +44,7 @@ local function formatter_status()
         table.insert(formatter_names, formatter.name)
     end
 
-   -- return "󰉿 " .. table.concat(formatter_names, ",")
-    return "󰉿 " .. table.concat(formatter_names, "|")
+   return "󰉿 " .. table.concat(formatter_names, ",")
 end
 
 local function linter_status()
