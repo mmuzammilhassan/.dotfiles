@@ -10,7 +10,8 @@ if [ -z "$PROJECT_NAME" ]; then
 fi
 
 # 2. Create directory
-mkdir "$PROJECT_NAME" && cd "$PROJECT_NAME"
+mkdir "$PROJECT_NAME" 
+cd "$PROJECT_NAME"
 
 # 3. Configure DDEV
 ddev config --project-type=laravel --docroot=public 
