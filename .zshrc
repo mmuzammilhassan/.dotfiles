@@ -214,45 +214,75 @@ bindkey -s '\ef' "tmux-sessionizer\n"
 #bindkey -s '\en' "tmux-sessionizer -t 2\n"
 #bindkey -s '\es' "tmux-sessionizer -t 3\n"
 
-# Usage: laravel-new my-app
+
+
+
+
 laravel-new() {
+    # 1. Validation
     if [ -z "$1" ]; then
         echo "Usage: laravel-new <project-name>"
         return 1
     fi
+    PROJECT_NAME=$1
 
-    echo "Setting up Laravel Project: $1"
-    mkdir -p "$1" && cd "$1"
+    echo "Initializing DDEV Project: $PROJECT_NAME"
+    mkdir -p "$PROJECT_NAME" && cd "$PROJECT_NAME"
 
-    # 1. Configure & Start
-    ddev config --project-type=laravel --docroot=public --create-docroot
+    # 2. Start DDEV (Standard Config)
+    # We include MariaDB by default just in case you choose MySQL in the box.
+    # If you choose SQLite, it works fine too (the container just idles).
+    # ddev config --project-type=laravel --docroot=public --omit-containers=db
+    ddev config --project-type=laravel --docroot=public 
     ddev start
 
-    # 2. Install Laravel (Standard)
-    echo "Downloading Laravel..."
-#    ddev composer create --prefer-dist laravel/laravel .
-    ddev composer create-project --prefer-dist laravel/laravel .
+    # 3. Install the Tool Box (Inside Container)
+    echo "Installing Laravel Installer..."
+    ddev composer require laravel/installer
 
+    # 4. THE MAGIC STEP (The Interactive Box)
+    echo " Launching Interactive Installer..."
+    echo " (Select your Stack, Testing, and DB here)"
+    echo "⚠️ NOTE: If asked to migrate, say 'NO' (Files aren't ready yet)"
 
-    # 3. Install IDE Helper (For Neovim Autocomplete)
-    echo "Installing Neovim Helpers..."
+    # We install into 'tmp' to bypass the "current directory" error
+    # We use the full path to ensure DDEV finds the 'laravel' command
+    #ddev exec -it ~/.config/composer/vendor/bin/laravel new tmp
+    ddev exec laravel new tmp --force
+
+    # 5. The Switcheroo (Move files up)
+    echo "Moving files to root..."
+    ddev exec "rsync -a tmp/ ./ && rm -rf tmp"
+
+    # 6. Add Adminer
+    echo "➕ Adding Adminer..."
+    ddev addon get ddev/ddev-adminer
+
+    # 7. Neovim IDE Helpers
+    echo "Generating Neovim Helpers..."
     ddev composer require --dev barryvdh/laravel-ide-helper
-    
-    # 4. Generate Helper Files
-    # We allow these to fail gracefully (|| true) just in case the app isn't perfectly ready, 
-    # so it doesn't stop the whole script.
+
+    # 8. Neovim IDE Helpers
+    echo "Generating Laravel Debugbar For Browser..."
+    ddev composer require --dev barryvdh/laravel-debugbar
+
+    # We allow these to fail (|| true) just in case the installer skipped something
     ddev artisan ide-helper:generate || true
     ddev artisan ide-helper:meta || true
     ddev artisan ide-helper:models -N || true
 
-    # 5. Finalize
-    ddev artisan key:generate
-    ddev artisan migrate
-    
-    echo "Done! User: admin / Pass: password (if using Breeze later)"
+    # 9. Finalize
+    # echo "Running Migrations..."
+    # ddev artisan migrate
+
+    echo "Project Ready!"
+    echo "Website: https://$PROJECT_NAME.ddev.site"
+    echo "Adminer: https://$PROJECT_NAME.ddev.site/adminer"
+
     ddev launch
 }
 
+# wordpress with ddev
 wordpress-new() {
     if [ -z "$1" ]; then
         echo "Usage: wordpress-new <project-name>"

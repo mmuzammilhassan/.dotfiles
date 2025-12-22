@@ -14,19 +14,19 @@ local function lsp_status_short()
     return "󰒋 " .. table.concat(names, ",")
 end
 
-local function git_branch()
-    local ok, handle = pcall(io.popen, "git branch --show-current 2>/dev/null")
-    if not ok or not handle then
-        return ""
-    end
-    local branch = handle:read("*a")
-    handle:close()
-    if branch and branch ~= "" then
-        branch = branch:gsub("\n", "")
-        return " 󰊢 " .. branch
-    end
-    return ""
-end
+-- local function git_branch()
+--     local ok, handle = pcall(io.popen, "git branch --show-current 2>/dev/null")
+--     if not ok or not handle then
+--         return ""
+--     end
+--     local branch = handle:read("*a")
+--     handle:close()
+--     if branch and branch ~= "" then
+--         branch = branch:gsub("\n", "")
+--         return " 󰊢 " .. branch
+--     end
+--     return ""
+-- end
 
 local function formatter_status()
     local ok, conform = pcall(require, "conform")
@@ -89,17 +89,17 @@ local function open_lsp_symbols()
     require("snacks").picker.lsp_symbols()
 end
 
-local function open_git_branches()
-    require("snacks").picker.git_branches()
-end
+-- local function open_git_branches()
+--     require("snacks").picker.git_branches()
+-- end
 
-_G.git_branch = safe_git_branch
+-- _G.git_branch = safe_git_branch
 _G.lsp_status = safe_lsp_status
 _G.formatter_status = safe_formatter_status
 _G.linter_status = safe_linter_status
 _G.open_file_explorer = open_file_explorer
 _G.open_lsp_symbols = open_lsp_symbols
-_G.open_git_branches = open_git_branches
+-- _G.open_git_branches = open_git_branches
 
 -- local function setup_statusline_colors()
 --     vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE", fg = "#d4be98" })
@@ -114,12 +114,12 @@ _G.open_git_branches = open_git_branches
 
 vim.opt.statusline = " %@v:lua.open_file_explorer@ 󰉋 %X"
     .. "%@v:lua.open_lsp_symbols@ 󰒕 %X"
-    .. "%@v:lua.open_git_branches@ 󰊢 %X"
+    -- .. "%@v:lua.open_git_branches@ 󰊢 %X"
     .. " %f"
     .. " %m"
     .. " %r"
     .. "%="
-    .. "%{v:lua.git_branch()}"
+    -- .. "%{v:lua.git_branch()}"
     .. " %{v:lua.linter_status()}"
     .. " %{v:lua.formatter_status()}"
     .. " %{v:lua.lsp_status()}"

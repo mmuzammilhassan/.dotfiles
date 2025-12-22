@@ -8,12 +8,14 @@
 -- require("zephyr.mouse_off")
 require("zephyr.cursor_blinking")
 require("zephyr.folding_code")
+
 require("config.icons")
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
 require("config.mason-verify")
 require("config.health-check")
+
 require("core.mason-path")
 require("core.lsp")
 require("core.lazy")
