@@ -44,7 +44,8 @@ local function formatter_status()
         table.insert(formatter_names, formatter.name)
     end
 
-    return "󰉿 " .. table.concat(formatter_names, ",")
+   -- return "󰉿 " .. table.concat(formatter_names, ",")
+    return "󰉿 " .. table.concat(formatter_names, "|")
 end
 
 local function linter_status()
@@ -112,19 +113,30 @@ _G.open_lsp_symbols = open_lsp_symbols
 -- })
 --
 
-vim.opt.statusline = " %@v:lua.open_file_explorer@ 󰉋 %X"
-    .. "%@v:lua.open_lsp_symbols@ 󰒕 %X"
-    -- .. "%@v:lua.open_git_branches@ 󰊢 %X"
-    .. " %f"
-    .. " %m"
-    .. " %r"
-    .. "%="
-    -- .. "%{v:lua.git_branch()}"
-    .. " %{v:lua.linter_status()}"
-    .. " %{v:lua.formatter_status()}"
-    .. " %{v:lua.lsp_status()}"
-    .. " %l:%c"
-    .. " %p%% "
+vim.opt.statusline =
+" %f"
+.. " %m"
+.. " %r"
+.. "%="
+.. " %{v:lua.linter_status()}"
+.. " %{v:lua.formatter_status()}"
+.. " %{v:lua.lsp_status()}"
+.. " %l:%c"
+.. " %p%%"
+
+-- vim.opt.statusline = " %@v:lua.open_file_explorer@ 󰉋 %X"
+--     .. "%@v:lua.open_lsp_symbols@ 󰒕 %X"
+--     -- .. "%@v:lua.open_git_branches@ 󰊢 %X"
+--     .. " %f"
+--     .. " %m"
+--     .. " %r"
+--     .. "%="
+--     -- .. "%{v:lua.git_branch()}"
+--     .. " %{v:lua.linter_status()}"
+--     .. " %{v:lua.formatter_status()}"
+--     .. " %{v:lua.lsp_status()}"
+--     .. " %l:%c"
+--     .. " %p%% "
 
 -- vim.opt.statusline = " %@v:lua.open_file_explorer@ 󰉋 %X"
 --     .. "%@v:lua.open_lsp_symbols@ 󰒕 %X"
