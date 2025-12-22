@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# 1. Get project name
+PROJECT_NAME=$1
+
+if [ -z "$PROJECT_NAME" ]; then
+    echo "Error: Please provide a project name."
+    echo "Usage: laravel-new <project-name>"
+    exit 1
+fi
+
+# 2. Create directory
+mkdir "$PROJECT_NAME" && cd "$PROJECT_NAME"
+
+# 3. Configure DDEV
+ddev config --project-type=laravel --docroot=public 
+ddev start
+
+# 4. Start DDEV
+ddev start
+
+# 5. Install Laravel
+ddev composer create --no-interaction --prefer-dist laravel/laravel .
+
+# 6. Success message
+echo "✅ Project $PROJECT_NAME is ready!"
+echo "👉 cd $PROJECT_NAME"

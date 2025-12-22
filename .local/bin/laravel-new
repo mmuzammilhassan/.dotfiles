@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# 1. Get project name
+PROJECT_NAME=$1
+
+if [ -z "$PROJECT_NAME" ]; then
+    echo "Error: Please provide a project name."
+    echo "Usage: laravel-new <project-name>"
+    exit 1
+fi
+
+# 2. Create directory
+mkdir "$PROJECT_NAME" && cd "$PROJECT_NAME"
+
+# 3. Configure DDEV
+ddev config --project-type=laravel --docroot=public 
+ddev start
+
+# 4. Install the Tool Box (Inside Container)
+echo "Installing Laravel Installer..."
+ddev composer require laravel/installer
+
+# We install into 'tmp' to bypass the "current directory" error
+# We use the full path to ensure DDEV finds the 'laravel' command
+#ddev exec -it ~/.config/composer/vendor/bin/laravel new tmp
+ddev exec laravel new tmp --force
+
+# 5. The Switcheroo (Move files up)
+echo "Moving files to root..."
+ddev exec "rsync -a tmp/ ./ && rm -rf tmp"
+
+# 6. Neovim IDE Helpers
+echo "Generating Neovim Helpers..."
+ddev composer require --dev barryvdh/laravel-ide-helper
+
+# 7. Debugbar 
+echo "Generating Laravel Debugbar For Browser..."
+ddev composer require --dev barryvdh/laravel-debugbar
+
+# We allow these to fail (|| true) just in case the installer skipped something
+ddev artisan ide-helper:generate || true
+ddev artisan ide-helper:meta || true
+ddev artisan ide-helper:models -N || true
+
+# 8. Finalize
+# echo "Running Migrations..."
+# ddev artisan migrate
+
+# echo "Project Ready!"
+echo "----------------------------------------------"
+echo "Project '$PROJECT_NAME' is ready!"
+echo "Website: https://$PROJECT_NAME.ddev.site"
+
+ddev launch
