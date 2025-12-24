@@ -1,31 +1,6 @@
 #!/bin/sh
 
-userresources=$HOME/.Xresources
-usermodmap=$HOME/.Xmodmap
-sysresources=/etc/X11/xinit/.Xresources
-sysmodmap=/etc/X11/xinit/.Xmodmap
-
-# merge in defaults and keymaps
-
-if [ -f $sysresources ]; then
-    xrdb -merge $sysresources
-fi
-
-if [ -f $sysmodmap ]; then
-    xmodmap $sysmodmap
-fi
-
-if [ -f "$userresources" ]; then
-    xrdb -merge "$userresources"
-
-fi
-
-if [ -f "$usermodmap" ]; then
-    xmodmap "$usermodmap"
-fi
-
-# start some nice programs
-
+# 1. ARCH SYSTEM BASICS
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
   [ -x "$f" ] && . "$f"
@@ -33,12 +8,22 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-rosepine dark &
+# 2. KEYBOARD FOUNDATION
+# Reset to standard US Dvorak first.
+# This prevents errors if you reload xmodmap multiple times.
 setxkbmap -layout us -variant dvorak &
+
+# Wait a split second for setxkbmap to apply, then apply your Layers
+(sleep 1 && xmodmap "$HOME/.Xmodmap") &
+
+# 3. INPUT TWEAKS
 xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1 &
+
+# 4. VISUALS
+# Run your theme script (defaults to dark on boot)
 picom --config ~/.config/picom/picom.conf &
+~/.local/bin/rosepine dark & 
 dwmblocks &
-#newlook &
-#xcompmgr &
-# xmodmap-remap2 & # this script execute in rosepine script
+
+# 5. START DWM
 exec dwm

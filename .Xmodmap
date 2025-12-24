@@ -1,0 +1,39 @@
+! -----------------------------------------------------------------
+! MODIFIERS & LAYERS
+! -----------------------------------------------------------------
+! Make CapsLock (66) the 'Mode_switch' key (the layer trigger)
+keycode 66 = Mode_switch
+
+! Make Right Alt (108) the new Caps_Lock
+keycode 108 = Caps_Lock
+
+! SPACE CADET: Space is Space on tap, Mode_switch on hold
+keycode 65 = space Mode_switch
+
+! -----------------------------------------------------------------
+! NAVIGATION LAYER (HJKL)
+! Format: keysym [regular] = [regular] [shift] [mode_switch] [mode_switch+shift]
+! -----------------------------------------------------------------
+keysym h = h H Left
+keysym j = j J Down
+keysym k = k K Up
+keysym l = l L Right
+
+! -----------------------------------------------------------------
+! UTILITY LAYER
+! -----------------------------------------------------------------
+keysym u = u U BackSpace
+keysym o = o O Delete
+keysym b = b B Return
+keysym e = e E Escape
+
+! -----------------------------------------------------------------
+! PROGRAMMING SYMBOLS
+! -----------------------------------------------------------------
+keysym c = c C dollar
+keysym p = p P bracketleft
+keysym y = y Y bracketright
+keysym i = i I parenleft
+keysym d = d D parenright
+keysym f = f F braceleft
+keysym g = g G braceright
