@@ -1,55 +1,71 @@
-#!/bin/sh
+#!/bin/bash
 
 # 1. Get project name
-PROJECT_NAME=$1
+if [ -z "$1" ]; then
+    read -p "Enter Project Name: " PROJECT_NAME
+else
+    PROJECT_NAME=$1
+fi
 
 if [ -z "$PROJECT_NAME" ]; then
-    echo "Error: Please provide a project name."
-    echo "Usage: laravel-new <project-name>"
+    echo "Error: Project name is required."
     exit 1
 fi
 
-# 2. Create directory
-mkdir "$PROJECT_NAME" 
+# 2. Ask about TALL Stack (Breeze)
+echo "----------------------------------------------"
+echo "Would you like to install the TALL Stack (Breeze with Livewire/Alpine)?"
+read -p "[y/N]: " INSTALL_BREEZE
+echo "----------------------------------------------"
+
+# 3. Create directory & DDEV
+mkdir "$PROJECT_NAME"
 cd "$PROJECT_NAME"
 
-# 3. Configure DDEV
+echo "Initializing DDEV..."
+# We remove --create-docroot so DDEV doesn't make an empty public folder that conflicts with Laravel
 ddev config --project-type=laravel --docroot=public 
 ddev start
 
-# 4. Install the Tool Box (Inside Container)
-echo "Installing Laravel Installer..."
-ddev composer require laravel/installer
+# 4. Install Laravel Framework
+echo "Downloading Laravel..."
+# FIX: We install to 'tmp' because the current folder contains .ddev, 
+# and Composer refuses to install into a non-empty directory.
+ddev composer create-project --prefer-dist laravel/laravel tmp
 
-# We install into 'tmp' to bypass the "current directory" error
-# We use the full path to ensure DDEV finds the 'laravel' command
-#ddev exec -it ~/.config/composer/vendor/bin/laravel new tmp
-ddev exec laravel new tmp --force
-
-# 5. The Switcheroo (Move files up)
-echo "Moving files to root..."
+# Move files from tmp to root and remove tmp
 ddev exec "rsync -a tmp/ ./ && rm -rf tmp"
 
-# 6. Neovim IDE Helpers
-echo "Generating Neovim Helpers..."
-ddev composer require --dev barryvdh/laravel-ide-helper
+# 5. Install TALL Stack (If requested)
+if [[ "$INSTALL_BREEZE" =~ ^[Yy]$ ]]; then
+    echo "Installing Breeze (TALL Stack)..."
+    ddev composer require laravel/breeze --dev
+    echo "This installs Breeze with Livewire (Tailwind + Alpine + Livewire)"
+    ddev artisan breeze:install livewire --dark
+else
+    echo "Skipping Starter Kit..."
+fi
 
-# 7. Debugbar 
-echo "Generating Laravel Debugbar For Browser..."
-ddev composer require --dev barryvdh/laravel-debugbar
+# 6. Install Dev Tools
+echo "Installing Neovim Helpers & Debugbar..."
+ddev composer require --dev barryvdh/laravel-ide-helper barryvdh/laravel-debugbar
 
-# We allow these to fail (|| true) just in case the installer skipped something
+# Generate Helpers
 ddev artisan ide-helper:generate || true
 ddev artisan ide-helper:meta || true
 ddev artisan ide-helper:models -N || true
 
-# 8. Finalize
-# echo "Running Migrations..."
-# ddev artisan migrate
+# 7. Git Setup
+if [ ! -d ".git" ]; then
+    git init
+    git add .
+    git commit -m "Initial commit"
+fi
 
-# echo "Project Ready!"
+# 8. Finalize
 echo "----------------------------------------------"
 echo "Project '$PROJECT_NAME' is ready!"
-echo "Website: https://$PROJECT_NAME.ddev.site"
+echo "Url: https://$PROJECT_NAME.ddev.site"
+echo "----------------------------------------------"
 
 ddev launch
