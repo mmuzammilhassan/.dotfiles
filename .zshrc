@@ -76,6 +76,7 @@ alias la="eza -lha --icons --group-directories-first"
 
 # -- Tools --
 alias n="nvim"
+alias dr="ddev artisan"
 alias v="vim"
 alias :q="exit"  # Muscle memory save
 # alias c="clear"

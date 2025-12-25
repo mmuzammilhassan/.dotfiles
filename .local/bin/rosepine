@@ -9,7 +9,8 @@ WALL_DIR="$HOME/pix/carlos"
 # 2. Apply Theme
 if [ "$MODE" = "dark" ]; then
     # Pick a specific wall or shuffle
-    WALL="$WALL_DIR/wallhaven-1pdqdv.jpg"
+    #WALL="$WALL_DIR/wallhaven-1pdqdv.jpg"
+    WALL="$WALL_DIR/wallhaven-poko7j.jpg"
     THEME="$THEME_DIR/rose-pine-moon.json"
 elif [ "$MODE" = "light" ]; then
     WALL="$WALL_DIR/wallhaven-poko7j.jpg"
