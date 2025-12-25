@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # 1. Get project name
 if [ -z "$1" ]; then
@@ -18,54 +18,62 @@ echo "Would you like to install the TALL Stack (Breeze with Livewire/Alpine)?"
 read -p "[y/N]: " INSTALL_BREEZE
 echo "----------------------------------------------"
 
-# 3. Create directory & DDEV
-mkdir "$PROJECT_NAME"
-cd "$PROJECT_NAME"
+# 3. Create directory
+mkdir -p "$PROJECT_NAME"
+cd "$PROJECT_NAME" || exit
 
-echo "Initializing DDEV..."
-# We remove --create-docroot so DDEV doesn't make an empty public folder that conflicts with Laravel
-ddev config --project-type=laravel --docroot=public 
+echo "Initializing DDEV in $(pwd)..."
+
+# 4. Configure DDEV (NO DATABASE CONTAINER)
+# Added --omit-containers=db so it doesn't waste resources on MariaDB
+ddev config --project-type=laravel --docroot=public --omit-containers=db
 ddev start
 
-# 4. Install Laravel Framework
+# 5. Install Laravel
 echo "Downloading Laravel..."
-# FIX: We install to 'tmp' because the current folder contains .ddev, 
-# and Composer refuses to install into a non-empty directory.
-ddev composer create-project --prefer-dist laravel/laravel tmp
+# Since this works for you, we keep using dot (.)
+ddev composer create-project --prefer-dist laravel/laravel .
 
-# Move files from tmp to root and remove tmp
-ddev exec "rsync -a tmp/ ./ && rm -rf tmp"
-
-# 5. Install TALL Stack (If requested)
+# 6. Install TALL Stack (If requested)
 if [[ "$INSTALL_BREEZE" =~ ^[Yy]$ ]]; then
     echo "Installing Breeze (TALL Stack)..."
     ddev composer require laravel/breeze --dev
-    echo "This installs Breeze with Livewire (Tailwind + Alpine + Livewire)"
     ddev artisan breeze:install livewire --dark
 else
     echo "Skipping Starter Kit..."
 fi
 
-# 6. Install Dev Tools
+# 7. Install Dev Tools
 echo "Installing Neovim Helpers & Debugbar..."
 ddev composer require --dev barryvdh/laravel-ide-helper barryvdh/laravel-debugbar
 
 # Generate Helpers
+echo "artisan ide-helper files..."
 ddev artisan ide-helper:generate || true
 ddev artisan ide-helper:meta || true
 ddev artisan ide-helper:models -N || true
 
-# 7. Git Setup
+# 8. Git Setup
+echo "git Initial..."
 if [ ! -d ".git" ]; then
     git init
     git add .
     git commit -m "Initial commit"
 fi
 
-# 8. Finalize
+# 9. SQLite Setup (Optional but helpful)
+# Ensures the file exists so you can open it in SQLiteBrowser immediately
+if [ ! -f "database/database.sqlite" ]; then
+    touch database/database.sqlite
+fi
+
+# 10. Launch
 echo "----------------------------------------------"
 echo "Project '$PROJECT_NAME' is ready!"
 echo "Url: https://$PROJECT_NAME.ddev.site"
 echo "----------------------------------------------"
 
 ddev launch
+
+# 11. The Magic Trick for CD
+exec $SHELL

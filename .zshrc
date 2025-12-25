@@ -4,8 +4,10 @@
 # Force Zsh to remove duplicates automatically
 typeset -U PATH
 
-# Add custom paths to the FRONT (Priority: Local > System)
+# Add custom p# Add Composer Global Bin to PATH
 export PATH="$HOME/.local/bin:$HOME/apps:$PATH"
+# Add Composer Global Bin to PATH
+export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 
 export TERM=xterm-256color
 export EDITOR="nvim"
