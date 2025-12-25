@@ -63,6 +63,14 @@ vim.opt.winborder = "rounded"                           -- https://neovim.io/doc
 
 -- vim.opt.guicursor = ""                               -- set the cursor to be a vertical bar
 
+-- -- MOUSE OFF
+-- vim.keymap.set("", "<up>", "<nop>", { noremap = true })
+-- vim.keymap.set("", "<down>", "<nop>", { noremap = true })
+-- vim.keymap.set("i", "<up>", "<nop>", { noremap = true })
+-- vim.keymap.set("i", "<down>", "<nop>", { noremap = true })
+-- vim.opt.mouse = ""
+
+
 -- vim.opt.cursorlineopt = "number"                     -- set the cursorline
 -- vim.opt.tabstop = 2                                  -- insert 2 spaces for a tab
 -- vim.opt.laststatus = 0                               -- Always display the status line

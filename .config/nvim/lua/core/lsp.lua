@@ -6,15 +6,15 @@
 
 local servers = {
     "lua-ls",        -- Lua language server
-    "gopls",         -- Go language server
-    "zls",           -- Zig language server
     "ts-ls",         -- TypeScript/JavaScript language server
-    "rust-analyzer", -- Rust language server
     "intelephense",  -- PHP language server
     "tailwindcss",   -- Tailwind CSS language server
     "html-ls",       -- HTML language server
     "css-ls",        -- CSS language server
-    "vue-ls",        -- Vue language server
+    -- "rust-analyzer", -- Rust language server
+    -- "gopls",         -- Go language server
+    -- "zls",           -- Zig language server
+    -- "vue-ls",        -- Vue language server
 }
 
 -- ============================================================================

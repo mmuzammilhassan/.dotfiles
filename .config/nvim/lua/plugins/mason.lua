@@ -10,15 +10,15 @@ return {
                 -- LSP servers (matching your vim.lsp.enable() config)
                 "twiggy-language-server",      -- twig LSP
                 "lua-language-server",         -- Lua LSP
-                "gopls",                       -- Go LSP
-                "zls",                         -- Zig LSP
                 "typescript-language-server",  -- TypeScript LSP
-                "rust-analyzer",               -- Rust LSP
                 "intelephense",                -- PHP LSP
                 "tailwindcss-language-server", -- Tailwind CSS LSP
                 "html-lsp",                    -- HTML LSP
                 "css-lsp",                     -- CSS LSP
-                "vue-language-server",         -- Vue LSP
+                -- "vue-language-server",         -- Vue LSP
+                -- "rust-analyzer",               -- Rust LSP
+                -- "gopls",                       -- Go LSP
+                -- "zls",                         -- Zig LSP
 
                 -- Formatters (for conform.nvim and general use)
                 "stylua",
@@ -32,7 +32,7 @@ return {
                 "golangci-lint",
                 "eslint_d",
                 "luacheck", -- Lua linting
-                --"pint",     -- Laravel Pint for PHP (formatting & linting)
+                "pint",     -- Laravel Pint for PHP (formatting & linting)
 
                 -- Additional useful tools
                 "delve",      -- Go debugger
@@ -40,9 +40,9 @@ return {
                 "shellcheck", -- Shell linter
 
                 -- Optional but useful additions
-                -- "markdownlint", -- Markdown linting
-                -- "yamllint",     -- YAML linting
-                -- "jsonlint",     -- JSON linting
+                "markdownlint", -- Markdown linting
+                "yamllint",     -- YAML linting
+                "jsonlint",     -- JSON linting
             },
         },
         config = function(_, opts)
