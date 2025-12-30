@@ -89,25 +89,20 @@ vim.keymap.set('n', '<Left>', '<cmd>vertical resize -5<cr>', { desc = "Increase 
 -- 2. Focus the explorer if you're in another split.
 -- 3. Close the explorer if you're already in it.
 vim.keymap.set("n", "<leader>e", function()
-    -- Check if any snack explorer pickers are already open
-    local explorer_pickers = require("snacks").picker.get({ source = "explorer" })
+  local snacks = require("snacks")
+  -- Find the first active explorer picker
+  local explorer = snacks.picker.get({ source = "explorer" })[1]
 
-    if #explorer_pickers > 0 then
-        -- If an explorer is open, get the first one
-        local picker = explorer_pickers[1]
+  if not explorer then
+    return snacks.picker.explorer() -- 1. Open if closed
+  end
 
-        if picker:is_focused() then
-            -- If you are already in the explorer, close it.
-            picker:close()
-        else
-            -- If the explorer is open but not focused, focus it.
-            picker:focus()
-        end
-    else
-        -- If no explorer is open, open a new one.
-        require("snacks").picker.explorer()
-    end
-end, { desc = "Toggle/Focus Snack Explorer" })
+  if explorer:is_focused() then
+    explorer:close() -- 3. Close if focused
+  else
+    explorer:focus() -- 2. Focus if open but unfocused
+  end
+end, { desc = "Snacks Explorer: Toggle/Focus" })
 
 
 -- Move selected line / block of text in visual mode

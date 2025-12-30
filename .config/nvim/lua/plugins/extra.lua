@@ -154,6 +154,49 @@ return {
     opts = {},
   },
 
+  -- {
+  --   "echasnovski/mini.nvim",
+  --   config = function()
+  --     -- 1. SETUP MINI ICONS (Laravel Fix)
+  --     require("mini.icons").setup({
+  --       filetype = {
+  --         -- Force the Laravel icon for 'blade' filetype
+  --         blade = { glyph = "", hl = "MiniIconsOrange" },
+  --       },
+  --     })
+  --     -- Mock devicons so other plugins (like Snacks) use these icons
+  --     require("mini.icons").mock_nvim_web_devicons()
+  --
+  --     -- 2. ENSURE BLADE DETECTION
+  --     vim.filetype.add({
+  --       pattern = {
+  --         [".*%.blade%.php"] = "blade",
+  --       },
+  --     })
+  --
+  --     -- 3. MINI AI
+  --     require("mini.ai").setup({ n_lines = 500 })
+  --
+  --     -- 4. MINI SURROUND (FIXED!)
+  --     -- I changed the mappings to start with 'gz' so 's' works normally again.
+  --     -- usage: gzaiw" (Add Inside Word "), gzd" (Delete "), gzr"' (Replace " with ')
+  --     require("mini.surround").setup({
+  --       mappings = {
+  --         add = "gza",          -- Add
+  --         delete = "gzd",       -- Delete
+  --         find = "gzf",         -- Find
+  --         find_left = "gzF",    -- Find left
+  --         highlight = "gzh",    -- Highlight
+  --         replace = "gzr",      -- Replace
+  --         update_n_lines = "gzn", -- Update `n_lines`
+  --       },
+  --     })
+  --
+  --     -- 5. MINI PAIRS
+  --     require("mini.pairs").setup()
+  --   end,
+  -- },
+
   {
     "echasnovski/mini.nvim",
     config = function()

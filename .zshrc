@@ -77,6 +77,7 @@ alias la="eza -lha --icons --group-directories-first"
 # -- Tools --
 alias n="nvim"
 alias dr="ddev artisan"
+alias dc="ddev composer"
 alias v="vim"
 alias :q="exit"  # Muscle memory save
 # alias c="clear"
@@ -88,7 +89,7 @@ alias cout="xclip -selection clipboard -o"
 
 # -- Functions --
 fcd() {
-    cd "$(find -type d | fzf -e)"
+    cd "$(sudo find -type d | fzf )"
 }
 
 # ==============================================

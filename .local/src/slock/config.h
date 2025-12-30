@@ -45,7 +45,7 @@ static const char * text_color = "#ffffff";
 /* text size (must be a valid size) */
 static const char * font_name = "6x10";
 
-static const int logosize = 75;
+static const int logosize = 40;
 static const int logow = 12; /* Grid width and height for right center alignment*/
 static const int logoh = 6;
 
@@ -64,10 +64,10 @@ static XRectangle rectangles[9] = {
 /*Enable blur*/
 #define BLUR
 /*Set blur radius*/
-static const int blurRadius=20; // 6
+static const int blurRadius=40; // 6
 
 /*Enable Pixelation*/
 #define PIXELATION
 
 /*Set pixelation radius*/
-static const int pixelSize=30;
+static const int pixelSize=60; // 30
