@@ -84,26 +84,9 @@ vim.keymap.set('n', '<Left>', '<cmd>vertical resize -5<cr>', { desc = "Increase 
 --vim.keymap.set("n", "=", ":resize +5<CR>")
 --vim.keymap.set("n", "-", ":resize -5<CR>")
 
--- my custom snack.explorer keybinds/logic
--- 1. Open the explorer if it's closed.
--- 2. Focus the explorer if you're in another split.
--- 3. Close the explorer if you're already in it.
-vim.keymap.set("n", "<leader>e", function()
-  local snacks = require("snacks")
-  -- Find the first active explorer picker
-  local explorer = snacks.picker.get({ source = "explorer" })[1]
-
-  if not explorer then
-    return snacks.picker.explorer() -- 1. Open if closed
-  end
-
-  if explorer:is_focused() then
-    explorer:close() -- 3. Close if focused
-  else
-    explorer:focus() -- 2. Focus if open but unfocused
-  end
-end, { desc = "Snacks Explorer: Toggle/Focus" })
-
+vim.keymap.set("n", "<leader>e", function() 
+  require("snacks").picker.explorer({ layout = "float" }) 
+end, { desc = "Snacks Explorer (Float)" })
 
 -- Move selected line / block of text in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", opts)
