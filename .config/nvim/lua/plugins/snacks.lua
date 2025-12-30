@@ -48,11 +48,13 @@ header = '',
       files = { hidden = true },
       grep = { hidden = true },
       explorer = {
+    auto_close = true,
         -- Your Explorer Config (Correctly setup now)
         layout = {
           preset = "sidebar",
           layout = {
-            position = "right",
+            -- position = "right",
+            position = "float",
           },
         },
       },
@@ -87,7 +89,10 @@ header = '',
             { "<leader>/",       function() Snacks.picker.grep() end,            desc = "Grep" },
             { "<leader>:",       function() Snacks.picker.command_history() end, desc = "Command History" },
             --          { "<leader>n",       function() Snacks.picker.notifications() end,                           desc = "Notification History" },
-            --            { "<leader>e",       function() Snacks.explorer() end,                                       desc = "File Explorer" },
+            { "<leader>e",       function() Snacks.picker.explorer() end,        desc = "File Explorer (Float)" },
+  -- { "<leader>e", function() Snacks.picker.explorer({ layout = { preset = "sidebar", position = "right" }, auto_close = true }) end, desc = "File Explorer (Auto-Close)" },
+          -- vim.keymap.set("n", "<leader>e", function() require("snacks").picker.explorer({ layout = "float" }) end, { desc = "Snacks Explorer (Float)" })
+
 
             -- FIND
             --            { "<leader>fb",      function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
