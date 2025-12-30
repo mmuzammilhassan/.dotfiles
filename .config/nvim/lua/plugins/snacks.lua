@@ -91,7 +91,7 @@ return {
     { "<leader>/",       function() Snacks.picker.grep() end,                                    desc = "Grep" },
     { "<leader>:",       function() Snacks.picker.command_history() end,                         desc = "Command History" },
     --          { "<leader>n",       function() Snacks.picker.notifications() end,                           desc = "Notification History" },
-    { "<leader>e",       function() Snacks.picker.explorer() end,                                desc = "File Explorer (Float)" },
+    { "<leader>e",       function() Snacks.picker.explorer() end,                                desc = "File Explorer (Float/Auto Close)" },
     -- { "<leader>e", function() Snacks.picker.explorer({ layout = { preset = "sidebar", position = "right" }, auto_close = true }) end, desc = "File Explorer (Auto-Close)" },
     -- vim.keymap.set("n", "<leader>e", function() require("snacks").picker.explorer({ layout = "float" }) end, { desc = "Snacks Explorer (Float)" })
 
