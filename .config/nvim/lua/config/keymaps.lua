@@ -84,10 +84,6 @@ vim.keymap.set('n', '<Left>', '<cmd>vertical resize -5<cr>', { desc = "Increase 
 --vim.keymap.set("n", "=", ":resize +5<CR>")
 --vim.keymap.set("n", "-", ":resize -5<CR>")
 
--- vim.keymap.set("n", "<leader>e", function()
---   require("snacks").picker.explorer({ layout = "float" })
--- end, { desc = "Snacks Explorer (Float)" })
-
 -- Move selected line / block of text in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", opts)
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", opts)

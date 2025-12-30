@@ -16,8 +16,10 @@ return {
       -- vim.api.nvim_set_hl(0, "Normal", { bg = "#0a0410" })
       --      vim.api.nvim_set_hl(0, "cursorline", { bg = "#eae2e3" })
       --      vim.api.nvim_set_hl(0, "colorcolumn", { bg = "#eae2e3" })
+      vim.api.nvim_set_hl(0, "cursorline", { bg = "#1a162e" })
+      vim.api.nvim_set_hl(0, "colorcolumn", { bg = "#1a162e" })
       -- vim.api.nvim_set_hl(0, "cursorline", { bg = "#393552" })
-       vim.api.nvim_set_hl(0, "colorcolumn", { bg = "#393552" })
+      -- vim.api.nvim_set_hl(0, "colorcolumn", { bg = "#393552" })
       -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#0a0410" })
       -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#09030f" })
     end
