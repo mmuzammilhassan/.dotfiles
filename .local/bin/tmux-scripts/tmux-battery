@@ -30,17 +30,19 @@ while :; do
   fi
 
   # Internet (optional): run your existing script or command here
-   net=$(~/.local/bin/sb-internet)
+   # net=$(~/.local/bin/sb-internet)
+
 #  nettraf=$(~/.local/bin/nettraf)
 
   # Date/time
   #datetime=$(date +" %a-%d %I:%M%P %m-%b")
 #  datetime=$(date +" %H:%M  %d-%a")
-   datetime=$(date +"%H:%M | %a %d %b")
+   # datetime=$(date +"%H:%M | %a %d %b")
 
   # Final output
   #tmux set-option -g status-right "$batt $net $nettraf $datetime"
-  tmux set-option -g status-right "$batt | $net| $datetime"
+  # tmux set-option -g status-right "$batt | $net| $datetime"
+  tmux set-option -g status-right "$batt "
 
   sleep 1
 done

@@ -1457,8 +1457,9 @@ xmakeglyphfontspecs(XftGlyphFontSpec *specs, const Glyph *glyphs, int len, int x
 	FcFontSet *fcsets[] = { NULL };
 	FcCharSet *fccharset;
 	int i, f, numspecs = 0;
-
-	for (i = 0, xp = winx, yp = winy + font->ascent; i < len; ++i) {
+	
+	/* TO THIS: */
+	for (i = 0, xp = winx, yp = winy + font->ascent + (linespacing / 2); i < len; ++i) {
 		/* Fetch rune and mode for current glyph. */
 		rune = glyphs[i].u;
 		mode = glyphs[i].mode;
@@ -1483,7 +1484,8 @@ xmakeglyphfontspecs(XftGlyphFontSpec *specs, const Glyph *glyphs, int len, int x
 				font = &dc.bfont;
 				frcflags = FRC_BOLD;
 			}
-			yp = winy + font->ascent;
+
+			yp = winy + (win.ch + font->ascent - font->descent) / 2 + voffset;
 		}
 
 		if (mode & ATTR_BOXDRAW) {
@@ -1706,11 +1708,13 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
 		XftDrawGlyphFontSpec(xw.draw, fg, specs, len);
 	}
 
+	/* In xdrawglyphfontspecs */
 	/* Render underline and strikethrough. */
-	if (base.mode & ATTR_UNDERLINE) {
-		XftDrawRect(xw.draw, fg, winx, winy + dc.font.ascent + 1,
-				width, 1);
-	}
+    int vcenter = (win.ch - dc.font.height) / 2; // Add this variable here too
+    
+    if (base.mode & ATTR_UNDERLINE) {
+        XftDrawRect(xw.draw, fg, winx, winy + dc.font.ascent + 1 + vcenter, width, 1);
+    }
 
 	if (base.mode & ATTR_STRUCK) {
 		XftDrawRect(xw.draw, fg, winx, winy + 2 * dc.font.ascent / 3,

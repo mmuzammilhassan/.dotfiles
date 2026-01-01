@@ -110,7 +110,6 @@ _G.open_lsp_symbols = open_lsp_symbols
 -- vim.api.nvim_create_autocmd("ColorScheme", {
 --     callback = setup_statusline_colors
 -- })
---
 
 vim.opt.statusline =
 " %f"
