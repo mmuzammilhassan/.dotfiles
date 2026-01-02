@@ -10,8 +10,8 @@
 // static char *font = "JetBrainsMonoNLNerdFontMono:medium:pixelsize=18:antialias=true:autohint=true";
 // static char *font2[] = { "JetBrainsMonoNLNerdFontMono:medium:pixelsize=18:antialias=true:autohint=true" };
 
-static char *font = "FiraCode:medium:pixelsize=18:antialias=true:autohint=true";
-static char *font2[] = { "FiraCode:medium:pixelsize=18:antialias=true:autohint=true" };
+static char *font = "FiraCode:medium:pixelsize=16:antialias=true:autohint=true";
+static char *font2[] = { "FiraCode:medium:pixelsize=16:antialias=true:autohint=true" };
 
 // Default line spacing (in pixels)
 static int voffset = 1; // Set to 1 or -1 to nudge the text up or down
@@ -19,7 +19,7 @@ static int linespacing = 10;
 static const int defaultlinespacing = 4;
 static const int maxlinespacing = 20;  // Optional upper limit
 
-static int borderpx = 12; // 8, 4 this inner space like padding
+static int borderpx = 8; // 8, 4 this inner space like padding
 /*
  * What program is execed by st depends of these precedence rules:
  * 1: program passed with -e

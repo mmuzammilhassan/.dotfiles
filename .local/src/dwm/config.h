@@ -2,15 +2,15 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* 2, 3 border pixel of windows */
-static const unsigned int gappx     = 30;       /* 4, 10 gaps between windows */
+static const unsigned int gappx     = 20;       /* 4, 10 gaps between windows */
 static const unsigned int snap      = 8;        /* 32 snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 0;        /* 0 means bottom bar */
+static const int topbar             = 1;        /* 0 means bottom bar */
                                     /* this is bar font*/
 //static const char *fonts[]          = { "FiraCode:medium:size=9", "JoyPixels:pixelsize=18:antialias=true:autohint=true"};
 //static const char *fonts[]          = { "JetBrainsMonoNLNerdFontMono:medium:size=12", "JoyPixels:pixelsize=16:antialias=true:autohint=true"};
-static const char *fonts[]          = { "FiraCode:medium:size=12", "JoyPixels:pixelsize=16:antialias=true:autohint=true"};
+static const char *fonts[]          = { "FiraCode:medium:size=10", "JoyPixels:pixelsize=12:antialias=true:autohint=true"};
                                     /* this is dmenu font*/
 static const char dmenufont[]       = "FiraCode:medium:size=18";
 static char normbgcolor[]           ="#222222";  // "#0a0410";  bar bg color
