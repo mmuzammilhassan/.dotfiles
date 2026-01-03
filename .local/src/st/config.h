@@ -19,7 +19,7 @@ static int linespacing = 10;
 static const int defaultlinespacing = 4;
 static const int maxlinespacing = 20;  // Optional upper limit
 
-static int borderpx = 8; // 8, 4 this inner space like padding
+static int borderpx = 0; // 12, 8, 4 this inner space like padding
 /*
  * What program is execed by st depends of these precedence rules:
  * 1: program passed with -e
