@@ -45,7 +45,7 @@ static const char * text_color = "#ffffff";
 /* text size (must be a valid size) */
 static const char * font_name = "6x10";
 
-static const int logosize = 40;
+static const int logosize = 100;
 static const int logow = 12; /* Grid width and height for right center alignment*/
 static const int logoh = 6;
 
