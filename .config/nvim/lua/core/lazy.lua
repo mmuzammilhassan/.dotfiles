@@ -17,6 +17,7 @@ require("lazy").setup({ import = "plugins" }, {
     missing = true,
     colorscheme = { "habamax" }
   },
+  git = { timeout = 300, },
   checker = {
     enabled = true,
     notify = false,

@@ -28,10 +28,10 @@ return {
                             module = "lazydev.integrations.blink",
                             score_offset = 100,
                         },
-                        -- laravel = {
-                        --     name = "laravel",
-                        --     module = "laravel.blink_source",
-                        -- },
+                        laravel = {
+                            name = "laravel",
+                            module = "laravel.blink_source",
+                        },
                         cmdline = {
                             min_keyword_length = 2,
                         },
