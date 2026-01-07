@@ -169,11 +169,12 @@ config.set('colors.webpage.darkmode.enabled', True)
 # Disable dark mode on YouTube/whatstapp
 config.set('colors.webpage.darkmode.enabled', False, 'https://www.youtube.com/*')
 config.set('colors.webpage.darkmode.enabled', False, 'https://web.whatsapp.com')
-config.set('colors.webpage.darkmode.enabled', False, 'https://github.com/*')
+# config.set('colors.webpage.darkmode.enabled', False, 'https://github.com/*')
 config.set('colors.webpage.darkmode.enabled', False, 'https://start.duckduckgo.com/*')
 
 # here comes my localhost sites
 # config.set('colors.webpage.darkmode.enabled', False, 'http://localhost:8001/*')
+# config.set('colors.webpage.darkmode.enabled', False, 'http://*.ddev.site/*')
 
 config.bind('J', 'tab-prev')
 config.bind('K', 'tab-next')

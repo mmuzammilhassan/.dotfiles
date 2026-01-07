@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* 1, 2, 3 border pixel of windows */
+static const unsigned int borderpx  = 2;        /* 1, 2, 3 border pixel of windows */
 static const unsigned int gappx     = 30;       /* 4, 10 gaps between windows */
 static const unsigned int snap      = 8;        /* 32 snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */

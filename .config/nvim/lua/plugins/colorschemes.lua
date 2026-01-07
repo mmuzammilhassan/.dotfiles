@@ -18,6 +18,7 @@ return {
       --      vim.api.nvim_set_hl(0, "colorcolumn", { bg = "#eae2e3" })
       vim.api.nvim_set_hl(0, "cursorline", { bg = "#1a162e" })
       vim.api.nvim_set_hl(0, "colorcolumn", { bg = "#1a162e" })
+      -- vim.api.nvim_set_hl(0, "statusline", { bg = "#1a162e", fg = "#8f8ba9" })
       -- vim.api.nvim_set_hl(0, "cursorline", { bg = "#393552" })
       -- vim.api.nvim_set_hl(0, "colorcolumn", { bg = "#393552" })
       -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#0a0410" })
