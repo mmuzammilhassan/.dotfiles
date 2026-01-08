@@ -23,7 +23,7 @@ fi
 
 echo "   Creating $NEW_PROJECT..."
 cp -r "$SOURCE" "$NEW_PROJECT"
-cd "$NEW_PROJECT"
+cd "$PROJECT_NAME" || exit
 
 # --- THE GIT FIX ---
 # Remove the template's Git history and start fresh

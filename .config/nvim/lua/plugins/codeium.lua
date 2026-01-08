@@ -23,3 +23,11 @@ return {
     vim.keymap.set("i", "<Up>", function() neocodeium.cycle(-1) end)
   end,
 }
+-- Why this is better for you:
+-- Zero Lag: No <leader> keys means typing is instant.
+-- Intuitive:
+-- Want code? Move Right.
+-- Want less code? Move Right with Shift.
+-- Want full line of code? Move left.
+-- Don't like the code? Move Down (cycle).
+-- Home Row: Since your xmodmap handles the arrows, you are controlling the AI purely with h/j/k/l + modifiers. It will feel like magic.
