@@ -4,7 +4,9 @@
 ## selected=$(find ~/projects/php/phpoop/ ~/projects/php/phpoop/gio ~/projects -maxdepth 3 -type d 2>/dev/null | fzf)
 ## selected=$(find ~/projects/php/phpoop/ -maxdepth 3 -type d 2>/dev/null | fzf)
 #selected=$(find ~/projects/php/phpoop/ -maxdepth 1 -type d 2>/dev/null | fzf)
-selected=$(find ~/Laravel -maxdepth 1 -type d 2>/dev/null | fzf)
+# selected=$(find ~/Laravel -maxdepth 1 -type d 2>/dev/null | fzf)
+selected=$(find ~/Laravel -maxdepth 1 -not -path '*/.*' -type d 2>/dev/null | fzf) # this will hide hidden folders
+
 [[ -z "$selected" ]] && exit 0
 
 # Session name (no dots)

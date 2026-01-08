@@ -26,7 +26,7 @@ echo "Initializing DDEV in $(pwd)..."
 
 # 4. Configure DDEV (NO DATABASE CONTAINER)
 # Added --omit-containers=db so it doesn't waste resources on MariaDB
-ddev config --project-type=laravel --docroot=public --omit-containers=db
+ddev config --project-type=laravel --docroot=public --omit-containers=db --php-version 8.5 --nodejs-version 24
 ddev start
 
 # 5. Install Laravel
