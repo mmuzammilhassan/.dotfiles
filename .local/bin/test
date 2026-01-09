@@ -1,5 +1,0 @@
-#!/bin/bash
-
-PROJECT_NAME=${PWD##*/} && echo "Url: https://$PROJECT_NAME.ddev.site"
-
-
