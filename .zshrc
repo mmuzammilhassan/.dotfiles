@@ -105,3 +105,11 @@ bindkey -s '\ef' "tmux-sessionizer\n"
 # ==============================================
 # Force blinking block cursor (Fix for Tmux/Neovim cursor shapes)
 echo -ne '\e[1 q'
+
+# ==============================================
+# 8. other configs
+# ==============================================
+# Add global Composer tools to system PATH
+# Composer Tools
+export PATH="$HOME/.config/composer/vendor/bin:$HOME/.composer/vendor/bin:$PATH"
+# export PATH="$HOME/.config/composer/vendor/bin:$PATH"
