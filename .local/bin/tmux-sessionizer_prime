@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+CONFIG_FILE="${HOME}/.config/tmux-sessionizer/slots"
+mkdir -p "$(dirname "$CONFIG_FILE")"
+touch "$CONFIG_FILE"
+
+get_session_path() {
+  local slot=$1
+  grep "^$slot:" "$CONFIG_FILE" | cut -d':' -f2-
+}
+
+set_session_path() {
+  local slot=$1
+  local path=$2
+  # Remove old slot if exists
+  grep -v "^$slot:" "$CONFIG_FILE" > "${CONFIG_FILE}.tmp"
+  echo "$slot:$path" >> "${CONFIG_FILE}.tmp"
+  mv "${CONFIG_FILE}.tmp" "$CONFIG_FILE"
+}
+
+choose_path_fzf() {
+  find ~/zephyr/php ~/zephyr/js ~/awebcode ~/ ~/zephyr -maxdepth 1 -type d | fzf
+}
+
+slot="$2"
+
+# Slot given: e.g. -s 0
+if [[ "$1" == "-s" && -n "$slot" ]]; then
+  saved_path=$(get_session_path "$slot")
+
+  # No saved path → open fzf
+  if [[ -z "$saved_path" ]]; then
+    selected=$(choose_path_fzf)
+    [[ -z "$selected" ]] && exit 0
+    set_session_path "$slot" "$selected"
+    saved_path="$selected"
+  fi
+
+  session_name=$(basename "$saved_path" | tr . _)
+
+  # Start new tmux or create new session if needed
+  if [[ -z "$TMUX" ]] && ! pgrep -x tmux >/dev/null; then
+    tmux new-session -s "$session_name" -c "$saved_path"
+    exit 0
+  fi
+
+  if ! tmux has-session -t="$session_name" 2>/dev/null; then
+    tmux new-session -ds "$session_name" -c "$saved_path"
+  fi
+
+  tmux switch-client -t "$session_name"
+  exit 0
+fi
+
+# No slot: interactive mode
+selected=$(choose_path_fzf)
+[[ -z "$selected" ]] && exit 0
+session_name=$(basename "$selected" | tr . _)
+
+if [[ -z "$TMUX" ]] && ! pgrep -x tmux >/dev/null; then
+  tmux new-session -s "$session_name" -c "$selected"
+  exit 0
+fi
+
+if ! tmux has-session -t="$session_name" 2>/dev/null; then
+  tmux new-session -ds "$session_name" -c "$selected"
+fi
+
+tmux switch-client -t "$session_name"
+
+

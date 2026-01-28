@@ -1,0 +1,31 @@
+#!/bin/sh
+
+MODE=$1   # "dark" or "light"
+
+# 1. Define Paths
+THEME_DIR="$HOME/.local/bin/themes"
+WALL_DIR="$HOME/pix/carlos"
+
+# 2. Apply Theme
+if [ "$MODE" = "dark" ]; then
+    # Pick a specific wall or shuffle
+    #WALL="$WALL_DIR/wallhaven-1pdqdv.jpg"
+    WALL="$WALL_DIR/wallhaven-poko7j.jpg"
+    THEME="$THEME_DIR/rose-pine-moon.json"
+elif [ "$MODE" = "light" ]; then
+    WALL="$WALL_DIR/wallhaven-poko7j.jpg"
+    THEME="$THEME_DIR/rose-pine-dawn.json"
+else
+    echo "Usage: rosepine [dark|light]"
+    exit 1
+fi
+
+# 3. Execute Visual Changes
+xwallpaper --zoom "$WALL"
+wal -c
+wal --theme "$THEME"
+
+# 4. Refresh DWM (Simulate Keypress)
+# Ensure you have a sleep if this happens too fast for DWM to catch
+sleep 0.2
+xdotool key "super+F5"

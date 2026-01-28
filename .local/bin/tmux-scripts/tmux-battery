@@ -1,0 +1,49 @@
+#!/bin/sh
+
+blink=1
+
+while :; do
+  # Battery block
+  for battery in /sys/class/power_supply/BAT?*; do
+    status=$(cat "$battery/status" 2>/dev/null)
+    capacity=$(cat "$battery/capacity" 2>/dev/null)
+
+    case "$status" in
+      "Full")         icon="" ;;        # Full
+      "Charging")     icon="" ;;        # Charging
+      "Discharging")  icon="󱙥" ;;        # Discharging
+      "Not charging") icon="󰝙" ;;        # 󰝙 Not Charging
+      "Unknown")      icon="" ;;        # Unknown
+      *)              icon="?" ;;
+    esac
+
+    [ "$status" = "Discharging" ] && [ "$capacity" -le 25 ] && warn="❗"
+  done
+
+  # Blink logic
+  if [ "$blink" -eq 1 ]; then
+    batt="$icon $warn$capacity%"
+    blink=0
+  else
+    batt="  $warn$capacity%"
+    blink=1
+  fi
+
+  # Internet (optional): run your existing script or command here
+   # net=$(~/.local/bin/sb-internet)
+
+#  nettraf=$(~/.local/bin/nettraf)
+
+  # Date/time
+  #datetime=$(date +" %a-%d %I:%M%P %m-%b")
+#  datetime=$(date +" %H:%M  %d-%a")
+   # datetime=$(date +"%H:%M | %a %d %b")
+
+  # Final output
+  #tmux set-option -g status-right "$batt $net $nettraf $datetime"
+  # tmux set-option -g status-right "$batt | $net| $datetime"
+  tmux set-option -g status-right "$batt "
+
+  sleep 1
+done
+

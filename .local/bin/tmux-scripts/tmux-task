@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+import datetime
+
+# (Hour, Minute, "Display Name")
+SCHEDULE = [
+    (0, 0, "Sleep"),
+    (5, 0, "Fajr"),
+    (5, 20, "Web Dev"),
+    (8, 0, "Break"),
+    (8, 20, "Web Dev"),
+    (12, 0, "Nashta"),
+    (12, 30, "Dhuhr"),
+    (13, 0, "Qailulah"),
+    (15, 0, "Fiverr"),
+    (16, 30, "Asr"),
+    (17, 45, "Maghrib"),
+    (18, 0, "Dinner"),
+    (19, 15, "Isha"),
+    (19, 30, "Web Focus"),
+    (23, 30, "Sleep"),
+]
+
+def get_current_task():
+    now = datetime.datetime.now()
+    current_min = now.hour * 60 + now.minute
+    current_task = "Rest"
+    for (h, m, task) in SCHEDULE:
+        if current_min >= (h * 60 + m):
+            current_task = task
+        else:
+            break
+    return current_task
+
+if __name__ == "__main__":
+    print(get_current_task())

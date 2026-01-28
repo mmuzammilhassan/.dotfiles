@@ -1,0 +1,15 @@
+// Documentation at https://www.sublimetext.com/docs/themes.html
+{
+	"variables":
+	{
+        "font_size_sm": 20, // statusbar font size
+        "font_size": 16,	// sidebar font size
+	},
+	"rules":
+	[
+		 {
+	        "class": "tab_label", 
+	        "font.size": 14, // tab name font size
+	    }
+	]
+}

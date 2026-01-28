@@ -1,0 +1,43 @@
+#!/bin/sh
+
+counter=0
+
+while :; do
+  # --- 1. Moon Logic (Cycles 4 phases) ---
+  moon_frame=$((counter % 4))
+  case $moon_frame in
+    0) moon="🌑" ;;
+    1) moon="🌓" ;;
+    2) moon="🌕" ;;
+    3) moon="🌗" ;;
+  esac
+
+  # --- 2. Pacman Logic (Mouth Open/Closed) ---
+  if [ $((counter % 2)) -eq 0 ]; then
+    pacman="ᗧ"
+  else
+    pacman="ᗤ" # O or use ᗤ if your font supports it
+  fi
+
+  # --- 3. The "Chase" Distance Logic ---
+  # This creates a loop of spaces shrinking from 5 down to 0
+  # We use modulo 6 to create a cycle of 6 steps
+  step=$((counter % 12)) 
+  
+  # I'm using a slightly longer cycle (12) so the reset isn't too frantic
+  # We map the step to a number of dots/spaces
+  case $step in
+    0) dist=" · · · " ;;
+    1) dist=" · · " ;;
+    2) dist=" · " ;;
+    3) dist="" ;;      # Caught!
+    4) dist="" ;;      # Eating...
+    *) dist=" · · · · " ;; # Reset/Respawn
+  esac
+
+  # --- Final Output ---
+  tmux set-option -g status-right "$pacman $dist $moon "
+
+  counter=$((counter + 1))
+  sleep 0.25 # Speed of the animation
+done

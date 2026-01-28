@@ -1,0 +1,26 @@
+# this are from .local/bin
+yay/
+alttab/
+dmenu-bluetooth/
+
+# this are from .local/src/*
+# Ignore the temporary object files (the garbage)
+# Ignore Object Files (The egg shells)
+*.o
+*.a
+
+# Ignore Patch Backups
+*.orig
+*.rej
+
+# Ignore Compiled Binaries (The cakes)
+# We list them specifically so we don't accidentally ignore scripts
+.local/src/dwm/dwm
+.local/src/st/st
+.local/src/slock/slock
+.local/src/dwmblocks/dwmblocks
+
+# Optional: Ignore OS junk
+.DS_Store
+Thumbs.db
+Sublundo/

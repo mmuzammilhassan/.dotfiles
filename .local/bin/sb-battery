@@ -1,0 +1,27 @@
+#!/bin/sh
+
+for battery in /sys/class/power_supply/BAT?*; do
+  status=$(cat "$battery/status" 2>/dev/null)
+  capacity=$(cat "$battery/capacity" 2>/dev/null)
+
+  case "$status" in
+    "Full")         icon="" ;;        # Full
+    "Charging")     icon="" ;;        # Charging
+    "Discharging")  icon="󱙥" ;;        # Discharging
+    "Not charging") icon="󰝙" ;;        # Not Charging
+    "Unknown")      icon="" ;;        # Unknown
+    *)              icon="?" ;;
+  esac
+
+  warn=""
+  [ "$status" = "Discharging" ] && [ "$capacity" -le 25 ] && warn="❗"
+done
+
+  # Internet (optional): run your existing script or command here
+  #net=$(~/.local/bin/sb-internet1)
+
+  # Date/time
+  #datetime=$(date +" %H:%M  %a-%d-%b")
+
+  # Final output
+  echo " $icon $warn$capacity%"

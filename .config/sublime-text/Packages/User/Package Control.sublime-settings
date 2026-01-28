@@ -1,0 +1,28 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"AlpineJS",
+		"Blade Snippets",
+		"Emmet",
+		"FuzzyFileNav",
+		"Laravel Blade",
+		"Laravel Blade AutoComplete",
+		"LSP",
+		"LSP-copilot",
+		"LSP-css",
+		"LSP-html",
+		"LSP-intelephense",
+		"LSP-tailwindcss",
+		"LSP-typescript",
+		"NeoVintageous",
+		"Night Owl",
+		"Package Control",
+		"Sublundo",
+		"Theme - Rose Pine",
+	],
+}

@@ -1,0 +1,58 @@
+#!/bin/sh
+
+PROJECT_NAME=${PWD##*/}
+
+# 1. Check if we are in a Laravel project
+if [ ! -f artisan ]; then
+    echo "No 'artisan' file found. Are you inside a Laravel project?"
+    return 1
+fi
+
+echo "Configuring DDEV for this project..."
+
+# 2. Configure DDEV (NO DATABASE CONTAINER)
+# Added --omit-containers=db so it doesn't waste resources on MariaDB
+ddev config --project-type=laravel --docroot=public --omit-containers=db --php-version 8.5 --nodejs-version 24
+ddev start
+
+# 3. Force .env to use SQLite (so it doesn't look for MySQL)
+if grep -q "DB_CONNECTION=mysql" .env; then
+    sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/' .env
+    sed -i 's/DB_HOST=127.0.0.1//' .env
+    sed -i 's/DB_PORT=3306//' .env
+    # Create the file so Laravel doesn't crash
+    touch database/database.sqlite
+    echo "Switched MySQL to SQLite in .env file"
+fi
+
+# 4. Install Dev Tools
+echo "Installing Neovim Helpers & Debugbar..."
+ddev composer require --dev barryvdh/laravel-ide-helper barryvdh/laravel-debugbar
+
+# 5. Generate Helpers
+echo "artisan ide-helper files..."
+ddev artisan ide-helper:generate || true
+ddev artisan ide-helper:meta || true
+ddev artisan ide-helper:models -N || true
+
+# 6. Git Setup
+echo "git Initial..."
+if [ ! -d ".git" ]; then
+    git init
+    git add .
+    git commit -m "Initial commit"
+fi
+
+# 7. SQLite Setup (Optional but helpful)
+# Ensures the file exists so you can open it in SQLiteBrowser immediately
+if [ ! -f "database/database.sqlite" ]; then
+    touch database/database.sqlite
+fi
+
+# 8. Launch
+echo "----------------------------------------------"
+echo "Project '$PROJECT_NAME' is ready!"
+echo "Url: https://$PROJECT_NAME.ddev.site"
+echo "----------------------------------------------"
+
+ddev launch

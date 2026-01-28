@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Save the current tmux session
+~/.tmux/plugins/tmux-resurrect/scripts/save.sh
+
+# Find the oldest file and remove it, keeping only the latest one
+cd ~/.tmux/resurrect || exit 1
+oldest_file=$(ls -t | tail -n +4 | head -n 1)
+
+if [ -n "$oldest_file" ]; then
+  # rm "$oldest_file"
+  rm -r "$oldest_file"
+fi
+

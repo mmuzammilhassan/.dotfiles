@@ -1,0 +1,57 @@
+{
+    // --- Appearance ---
+    "theme": "Adaptive.sublime-theme",
+    "color_scheme": "Rosé Pine.sublime-color-scheme",
+    //"color_scheme": "Night Owl.sublime-color-scheme",
+    "font_face": "JetBrains Mono SemiBold",
+    "font_size": 12,
+    "overlay_scroll_bars": "enabled",
+    "hide_tab_scrolling_buttons": false,
+
+    // --- Minimalism (Neovim Vibe) ---
+    "draw_minimap": false,
+    "always_show_minimap_viewport": false,
+    "mini_diff": false,
+    "show_tabs": true,
+    "show_git_status": false,
+    "window_menu": false,
+    "gutter": false,              // Hiding gutter = True Zen Mode
+    "line_numbers": false,
+    "relative_line_numbers": false,
+    "fold_buttons": false,
+    "margin": 40,
+
+    // --- Cursor & Layout ---
+    "caret_style": "blink",
+    "block_caret": true,
+    // "caret_extra_top": 2,
+    // "caret_extra_bottom": 2,
+    // "caret_extra_width": 2,
+    "highlight_line": true,
+    "line_padding_bottom": 2,
+    "line_padding_top": 2,
+    "rulers": [[84, "solid", 10]],
+    "word_wrap": false,
+    "scroll_past_end": true,
+    "scroll_context_lines": 8, // Native scrolloff
+    "sidebar_on_right": true,
+
+    // --- Sidebar Customization ---
+    "sidebar_font_size": 12,
+
+    // --- Behavior ---
+    "save_on_focus_lost": true,
+    "index_files": false,
+    "trim_trailing_white_space_on_save": true,
+    "folder_exclude_patterns": ["vendor", "node_modules", ".git"], // FIXED: Must be a list
+    "show_inlay_hints": true,
+
+    // --- Vim Mode ---
+    // You MUST ignore default Vintage for NeoVintageous to work
+    "ignored_packages": ["LSP",
+        "LSP-intelephense",
+        "Vintage",
+    ],
+    "vintage_start_in_command_mode": true,
+    "neovintageous_build_version": 13200,
+}
